@@ -138,9 +138,11 @@ export default function App() {
       ],
     });
     // Add default test player
+    const p12Avatar = { bodyType: 'cat', color: 'cyan', eyes: 'shades', mouth: 'smile', accessory: 'headphones' };
     setCurrentPlayer({
       id: 'p12',
       nickname: 'Player #12',
+      customAvatar: p12Avatar,
       avatar: '🚀',
       team_name: 'Blue Titans',
       team_color: '#3b82f6',
@@ -148,10 +150,10 @@ export default function App() {
       streak: 0,
     });
     setPlayers([
-      { id: 'p12', nickname: 'Player #12', avatar: '🚀', team_name: 'Blue Titans', team_color: '#3b82f6', score: 0, streak: 0 },
-      { id: 'b1', nickname: 'Temur', avatar: '🐉', team_name: 'Red Dragons', team_color: '#ef4444', score: 0, streak: 0 },
-      { id: 'b2', nickname: 'Sarah', avatar: '🦅', team_name: 'Golden Eagles', team_color: '#f59e0b', score: 0, streak: 0 },
-      { id: 'b3', nickname: 'Jasur', avatar: '⚡', team_name: 'Blue Titans', team_color: '#3b82f6', score: 0, streak: 0 },
+      { id: 'p12', nickname: 'Player #12', customAvatar: p12Avatar, avatar: '🚀', team_name: 'Blue Titans', team_color: '#3b82f6', score: 0, streak: 0 },
+      { id: 'b1', nickname: 'Temur', customAvatar: { bodyType: 'alien', color: 'red', eyes: 'laser', mouth: 'teeth', accessory: 'horns' }, avatar: '🐉', team_name: 'Red Dragons', team_color: '#ef4444', score: 0, streak: 0 },
+      { id: 'b2', nickname: 'Sarah', customAvatar: { bodyType: 'blob', color: 'amber', eyes: 'happy', mouth: 'laugh', accessory: 'crown' }, avatar: '🦅', team_name: 'Golden Eagles', team_color: '#f59e0b', score: 0, streak: 0 },
+      { id: 'b3', nickname: 'Jasur', customAvatar: { bodyType: 'robot', color: 'indigo', eyes: 'goggles', mouth: 'smile', accessory: 'cap' }, avatar: '⚡', team_name: 'Blue Titans', team_color: '#3b82f6', score: 0, streak: 0 },
     ]);
   };
 
@@ -436,10 +438,10 @@ export default function App() {
       sendWsAction('add_bot_players');
     } else {
       const demoBots = [
-        { id: 'b10', nickname: 'Alex (Titans)', avatar: '⚡', team_name: 'Blue Titans', team_color: '#3b82f6', score: 0, streak: 0 },
-        { id: 'b11', nickname: 'Malika (Dragons)', avatar: '🐉', team_name: 'Red Dragons', team_color: '#ef4444', score: 0, streak: 0 },
-        { id: 'b12', nickname: 'Jasur (Eagles)', avatar: '🦅', team_name: 'Golden Eagles', team_color: '#f59e0b', score: 0, streak: 0 },
-        { id: 'b13', nickname: 'Nodira (Wolves)', avatar: '🐺', team_name: 'Cyber Wolves', team_color: '#10b981', score: 0, streak: 0 },
+        { id: 'b10', nickname: 'Alex (Titans)', customAvatar: { bodyType: 'cat', color: 'cyan', eyes: 'shades', mouth: 'smile', accessory: 'headphones' }, avatar: '⚡', team_name: 'Blue Titans', team_color: '#3b82f6', score: 0, streak: 0 },
+        { id: 'b11', nickname: 'Malika (Dragons)', customAvatar: { bodyType: 'star', color: 'rose', eyes: 'anime', mouth: 'tongue', accessory: 'crown' }, avatar: '🐉', team_name: 'Red Dragons', team_color: '#ef4444', score: 0, streak: 0 },
+        { id: 'b12', nickname: 'Jasur (Eagles)', customAvatar: { bodyType: 'blob', color: 'amber', eyes: 'wink', mouth: 'laugh', accessory: 'cap' }, avatar: '🦅', team_name: 'Golden Eagles', team_color: '#f59e0b', score: 0, streak: 0 },
+        { id: 'b13', nickname: 'Nodira (Wolves)', customAvatar: { bodyType: 'alien', color: 'emerald', eyes: 'laser', mouth: 'mustache', accessory: 'halo' }, avatar: '🐺', team_name: 'Cyber Wolves', team_color: '#10b981', score: 0, streak: 0 },
       ];
       setPlayers((prev) => [...prev, ...demoBots]);
     }

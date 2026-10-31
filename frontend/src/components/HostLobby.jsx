@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Copy, Check, Clock, Sparkles, ArrowRight, UserPlus, Shield, Users, RefreshCw } from 'lucide-react';
 import CrowdTrophyIllustration from './CrowdTrophyIllustration';
+import KahootAvatar from './KahootAvatar';
 
 export default function HostLobby({
   quizTitle = 'General Knowledge Challenge',
@@ -110,7 +111,7 @@ export default function HostLobby({
                   <div className="team-members-list">
                     {teamPlayers.map((p) => (
                       <span key={p.id} className="player-chip">
-                        <span className="player-avatar">{p.avatar}</span>
+                        <KahootAvatar avatar={p.customAvatar || p.avatar} size={24} />
                         <span className="player-nick">{p.nickname}</span>
                       </span>
                     ))}
@@ -122,7 +123,7 @@ export default function HostLobby({
             <div className="players-chip-wrap">
               {players.map((p) => (
                 <div key={p.id} className="player-chip single-mode">
-                  <span className="player-avatar">{p.avatar}</span>
+                  <KahootAvatar avatar={p.customAvatar || p.avatar} size={28} />
                   <span className="player-nick">{p.nickname}</span>
                 </div>
               ))}

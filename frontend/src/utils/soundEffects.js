@@ -87,6 +87,75 @@ class SoundEffects {
     });
   }
 
+  playAvatarPop(freq = 700) {
+    if (this.isMuted) return;
+    this.initContext();
+    if (!this.ctx) return;
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      const t = this.ctx.currentTime;
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, t);
+      osc.frequency.exponentialRampToValueAtTime(freq * 0.45, t + 0.09);
+      gain.gain.setValueAtTime(0.2, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(t);
+      osc.stop(t + 0.09);
+    } catch (e) {
+      console.warn("Audio pop error", e);
+    }
+  }
+
+  playAvatarBoing() {
+    if (this.isMuted) return;
+    this.initContext();
+    if (!this.ctx) return;
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      const t = this.ctx.currentTime;
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(260, t);
+      osc.frequency.exponentialRampToValueAtTime(680, t + 0.12);
+      osc.frequency.exponentialRampToValueAtTime(440, t + 0.22);
+      gain.gain.setValueAtTime(0.25, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(t);
+      osc.stop(t + 0.22);
+    } catch (e) {
+      console.warn("Audio boing error", e);
+    }
+  }
+
+  playAvatarGiggle() {
+    if (this.isMuted) return;
+    this.initContext();
+    const notes = [659.25, 783.99, 987.77, 1318.5]; // E5, G5, B5, E6
+    notes.forEach((freq, idx) => {
+      this.playTone(freq, "sine", 0.08, 0.15, idx * 0.04);
+    });
+  }
+
+  playSpinTick() {
+    if (this.isMuted) return;
+    this.initContext();
+    this.playTone(1100 + Math.random() * 300, "triangle", 0.03, 0.1);
+  }
+
+  playSpinLand() {
+    if (this.isMuted) return;
+    this.initContext();
+    const chime = [523.25, 659.25, 783.99, 1046.5];
+    chime.forEach((f, idx) => {
+      this.playTone(f, "triangle", 0.2, 0.22, idx * 0.06);
+    });
+  }
+
   toggleMute() {
     this.isMuted = !this.isMuted;
     return this.isMuted;

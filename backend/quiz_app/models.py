@@ -101,7 +101,7 @@ class Player(models.Model):
     session = models.ForeignKey(GameSession, related_name="players", on_delete=models.CASCADE)
     player_token = models.CharField(max_length=64, default=uuid.uuid4)
     nickname = models.CharField(max_length=50)
-    avatar = models.CharField(max_length=50, default="🚀")
+    avatar = models.CharField(max_length=500, default="🚀")
     team_name = models.CharField(max_length=50, blank=True, default="")
     team_color = models.CharField(max_length=20, blank=True, default="#8b5cf6")
     score = models.IntegerField(default=0)

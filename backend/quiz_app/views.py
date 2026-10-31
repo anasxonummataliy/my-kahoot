@@ -150,7 +150,11 @@ def session_detail(request, pin):
 def session_join(request, pin):
     session = get_object_or_404(GameSession, pin=pin)
     nickname = request.data.get("nickname", "").strip() or f"Player {session.players.count() + 1}"
-    avatar = request.data.get("avatar", "🚀")
+    custom_avatar = request.data.get("customAvatar")
+    if custom_avatar and isinstance(custom_avatar, dict):
+        avatar = json.dumps(custom_avatar)
+    else:
+        avatar = request.data.get("avatar", "🚀")
     team_name = request.data.get("team_name", "").strip()
     team_color = request.data.get("team_color", "#8b5cf6")
 
@@ -178,6 +182,7 @@ def session_join(request, pin):
         "player_token": player.player_token,
         "nickname": player.nickname,
         "avatar": player.avatar,
+        "customAvatar": custom_avatar,
         "team_name": player.team_name,
         "team_color": player.team_color,
         "score": player.score,

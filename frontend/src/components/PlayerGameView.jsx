@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Trophy, Check, X, Flame, Shield, Users, Clock } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import KahootAvatar from './KahootAvatar';
 
 export default function PlayerGameView({
   question,
@@ -36,7 +37,13 @@ export default function PlayerGameView({
     return (
       <div className="player-waiting-view glass-panel">
         <div className="waiting-spinner-glow" />
-        <Trophy size={48} className="waiting-trophy" />
+        {player ? (
+          <div className="waiting-avatar-wrap">
+            <KahootAvatar avatar={player.customAvatar || player.avatar} size={100} isInteractive={true} />
+          </div>
+        ) : (
+          <Trophy size={48} className="waiting-trophy" />
+        )}
         <h2>Keyingi savol kutilmoqda...</h2>
         <p>Boshlovchi savolni boshlaguncha tayyor turing!</p>
         {player && (
@@ -94,7 +101,7 @@ export default function PlayerGameView({
         </div>
 
         <div className="player-identity-pill">
-          {player?.avatar && <span className="p-avatar">{player.avatar}</span>}
+          <KahootAvatar avatar={player?.customAvatar || player?.avatar} size={28} />
           <span className="p-nick">{player?.nickname || 'Player #12'}</span>
           {isTeamMode && player?.team_name && (
             <span className="p-team" style={{ backgroundColor: player.team_color || '#8b5cf6' }}>
@@ -155,11 +162,15 @@ export default function PlayerGameView({
         </div>
       )}
 
-      {/* Review Feedback Banner after question ends */}
+      {/* Review Feedback Banner with animated avatar reaction! */}
       {status === 'review' && answerResult && (
         <div className={`player-feedback-card ${answerResult.is_correct ? 'correct' : 'wrong'}`}>
-          <div className="feedback-icon-circle">
-            {answerResult.is_correct ? <Check size={28} /> : <X size={28} />}
+          <div className="feedback-avatar-col">
+            <KahootAvatar
+              avatar={player?.customAvatar || player?.avatar}
+              size={58}
+              reaction={answerResult.is_correct ? 'celebrate' : 'wrong'}
+            />
           </div>
           <div className="feedback-content">
             <h3>{answerResult.is_correct ? "To'g'ri! Barakalla!" : "Noto'g'ri!"}</h3>

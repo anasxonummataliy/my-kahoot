@@ -6,6 +6,18 @@ from django.utils import timezone
 from .models import GameSession, Player, Question, Option, PlayerAnswer, Quiz
 
 
+def parse_player(p):
+    avatar_val = p.get("avatar", "")
+    custom_avatar = None
+    if isinstance(avatar_val, str) and avatar_val.startswith("{"):
+        try:
+            custom_avatar = json.loads(avatar_val)
+        except Exception:
+            pass
+    p["customAvatar"] = custom_avatar
+    return p
+
+
 class QuizConsumer(AsyncJsonWebsocketConsumer):
     async def connect(self):
         self.pin = self.scope["url_route"]["kwargs"]["pin"]
@@ -52,7 +64,11 @@ class QuizConsumer(AsyncJsonWebsocketConsumer):
     # Handlers
     async def handle_join_game(self, payload):
         nickname = payload.get("nickname", "Player").strip() or "Player"
-        avatar = payload.get("avatar", "🚀")
+        custom_avatar = payload.get("customAvatar")
+        if custom_avatar and isinstance(custom_avatar, dict):
+            avatar = json.dumps(custom_avatar)
+        else:
+            avatar = str(payload.get("avatar", "🚀"))
         team_name = payload.get("team_name", "").strip()
         team_color = payload.get("team_color", "#8b5cf6")
         is_host = payload.get("is_host", False)
@@ -216,7 +232,7 @@ class QuizConsumer(AsyncJsonWebsocketConsumer):
         except GameSession.DoesNotExist:
             return None
 
-        players = list(session.players.all().values("id", "nickname", "avatar", "team_name", "team_color", "score", "streak"))
+        players = [parse_player(p) for p in session.players.all().values("id", "nickname", "avatar", "team_name", "team_color", "score", "streak")]
         total_questions = session.quiz.questions.count()
         current_q = session.current_question
 
@@ -268,7 +284,7 @@ class QuizConsumer(AsyncJsonWebsocketConsumer):
                 team_name=team_name,
                 team_color=team_color,
             )
-        return {
+        p_dict = {
             "id": player.id,
             "player_token": player.player_token,
             "nickname": player.nickname,
@@ -278,6 +294,7 @@ class QuizConsumer(AsyncJsonWebsocketConsumer):
             "score": player.score,
             "streak": player.streak,
         }
+        return parse_player(p_dict)
 
     @database_sync_to_async
     def set_team_mode(self, is_team_mode):
@@ -289,7 +306,7 @@ class QuizConsumer(AsyncJsonWebsocketConsumer):
     @database_sync_to_async
     def get_players_list(self):
         session = GameSession.objects.get(pin=self.pin)
-        return list(session.players.all().values("id", "nickname", "avatar", "team_name", "team_color", "score", "streak"))
+        return [parse_player(p) for p in session.players.all().values("id", "nickname", "avatar", "team_name", "team_color", "score", "streak")]
 
     @database_sync_to_async
     def start_current_question(self):
@@ -543,29 +560,28 @@ class QuizConsumer(AsyncJsonWebsocketConsumer):
 
     @database_sync_to_async
     def add_demo_bots(self):
-        import random
         session = GameSession.objects.get(pin=self.pin)
-        bot_names = [
-            ("Alex (Eagle)", "🦅", "Golden Eagles", "#f59e0b"),
-            ("Sarah (Titans)", "⚡", "Blue Titans", "#3b82f6"),
-            ("Temur (Dragons)", "🐉", "Red Dragons", "#ef4444"),
-            ("Malika (Cyber)", "🤖", "Cyber Wolves", "#10b981"),
-            ("Jasur (Titans)", "🔥", "Blue Titans", "#3b82f6"),
-            ("Madina (Dragons)", "💎", "Red Dragons", "#ef4444"),
+        bot_configs = [
+            ("Alex (Eagle)", json.dumps({"bodyType": "bear", "color": "amber", "eyes": "shades", "mouth": "smile", "accessory": "crown"}), "Golden Eagles", "#f59e0b"),
+            ("Sarah (Titans)", json.dumps({"bodyType": "cat", "color": "cyan", "eyes": "happy", "mouth": "laugh", "accessory": "headphones"}), "Blue Titans", "#3b82f6"),
+            ("Temur (Dragons)", json.dumps({"bodyType": "alien", "color": "red", "eyes": "laser", "mouth": "teeth", "accessory": "horns"}), "Red Dragons", "#ef4444"),
+            ("Malika (Cyber)", json.dumps({"bodyType": "robot", "color": "emerald", "eyes": "goggles", "mouth": "tongue", "accessory": "cap"}), "Cyber Wolves", "#10b981"),
+            ("Jasur (Titans)", json.dumps({"bodyType": "star", "color": "indigo", "eyes": "wink", "mouth": "mustache", "accessory": "halo"}), "Blue Titans", "#3b82f6"),
+            ("Madina (Dragons)", json.dumps({"bodyType": "blob", "color": "rose", "eyes": "anime", "mouth": "smile", "accessory": "flower"}), "Red Dragons", "#ef4444"),
         ]
         created = []
-        for name, av, team, color in bot_names:
+        for name, av_json, team, color in bot_configs:
             if not session.players.filter(nickname=name).exists():
                 p = Player.objects.create(
                     session=session,
                     nickname=name,
-                    avatar=av,
+                    avatar=av_json,
                     team_name=team,
                     team_color=color,
                     score=0,
                     streak=0,
                 )
-                created.append({
+                bot_data = {
                     "id": p.id,
                     "nickname": p.nickname,
                     "avatar": p.avatar,
@@ -573,5 +589,6 @@ class QuizConsumer(AsyncJsonWebsocketConsumer):
                     "team_color": p.team_color,
                     "score": p.score,
                     "streak": p.streak,
-                })
+                }
+                created.append(parse_player(bot_data))
         return created

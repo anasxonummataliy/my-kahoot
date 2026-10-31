@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Trophy, Crown, Sparkles, RotateCcw, Home, Users } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundManager } from '../utils/soundEffects';
+import KahootAvatar from './KahootAvatar';
 
 export default function PodiumView({
   players = [],
@@ -79,13 +80,13 @@ export default function PodiumView({
         </div>
       )}
 
-      {/* 3D-style Podium Stand */}
+      {/* 3D-style Podium Stand with Animated Kahoot Avatars */}
       <div className="podium-stage">
         {/* 2nd Place (Silver - Left) */}
         {second ? (
           <div className="podium-col second-place">
             <div className="podium-player-card">
-              <span className="avatar-big">{second.avatar}</span>
+              <KahootAvatar avatar={second.customAvatar || second.avatar} size={76} reaction="celebrate" />
               <span className="nick-text">{second.nickname}</span>
               <span className="score-pill">{second.score} ball</span>
             </div>
@@ -105,7 +106,7 @@ export default function PodiumView({
               <Crown size={32} />
             </div>
             <div className="podium-player-card champion">
-              <span className="avatar-big gold-glow">{first.avatar}</span>
+              <KahootAvatar avatar={first.customAvatar || first.avatar} size={94} reaction="celebrate" />
               <span className="nick-text champion-nick">{first.nickname}</span>
               <span className="score-pill champion-score">{first.score} ball</span>
             </div>
@@ -120,7 +121,7 @@ export default function PodiumView({
         {third ? (
           <div className="podium-col third-place">
             <div className="podium-player-card">
-              <span className="avatar-big">{third.avatar}</span>
+              <KahootAvatar avatar={third.customAvatar || third.avatar} size={68} reaction="celebrate" />
               <span className="nick-text">{third.nickname}</span>
               <span className="score-pill">{third.score} ball</span>
             </div>
@@ -142,7 +143,7 @@ export default function PodiumView({
             {players.slice(3, 8).map((p, i) => (
               <div key={p.id} className="runner-up-chip">
                 <span className="runner-rank">#{i + 4}</span>
-                <span className="runner-avatar">{p.avatar}</span>
+                <KahootAvatar avatar={p.customAvatar || p.avatar} size={24} />
                 <span className="runner-nick">{p.nickname}</span>
                 <span className="runner-score">{p.score} pts</span>
               </div>

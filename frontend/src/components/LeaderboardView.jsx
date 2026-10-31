@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Trophy, Medal, Flame, Users, ArrowRight, Flag } from 'lucide-react';
+import KahootAvatar from './KahootAvatar';
 
 export default function LeaderboardView({
   players = [],
@@ -92,7 +93,7 @@ export default function LeaderboardView({
             >
               <div className="standing-rank-col">{getRankBadge(idx)}</div>
               <div className="standing-player-col">
-                <span className="standing-avatar">{p.avatar}</span>
+                <KahootAvatar avatar={p.customAvatar || p.avatar} size={32} />
                 <div className="standing-nick-info">
                   <span className="standing-nick">{p.nickname}</span>
                   {p.team_name && (
