@@ -16,25 +16,26 @@ export default function CrowdTrophyIllustration() {
       >
         <defs>
           <radialGradient id="trophySunburst" cx="50%" cy="40%" r="50%">
-            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.45" />
-            <stop offset="50%" stopColor="#f59e0b" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+            <stop offset="0%" stopColor="#ff7a00" stopOpacity="0.55" />
+            <stop offset="50%" stopColor="#ff4500" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="#ff3300" stopOpacity="0" />
           </radialGradient>
 
           <linearGradient id="trophyGold" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#fef08a" />
-            <stop offset="40%" stopColor="#facc15" />
-            <stop offset="100%" stopColor="#ca8a04" />
+            <stop offset="0%" stopColor="#fff3b0" />
+            <stop offset="35%" stopColor="#ffb703" />
+            <stop offset="70%" stopColor="#ff6b00" />
+            <stop offset="100%" stopColor="#d9480f" />
           </linearGradient>
 
           <linearGradient id="crowdGrad" x1="50%" y1="0%" x2="50%" y2="100%">
-            <stop offset="0%" stopColor="#1e1145" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="#0d0722" stopOpacity="0.98" />
+            <stop offset="0%" stopColor="#2c1409" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#0f0603" stopOpacity="0.98" />
           </linearGradient>
 
           <linearGradient id="crowdFrontGrad" x1="50%" y1="0%" x2="50%" y2="100%">
-            <stop offset="0%" stopColor="#130930" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="#070314" stopOpacity="1" />
+            <stop offset="0%" stopColor="#1a0b05" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="#080302" stopOpacity="1" />
           </linearGradient>
         </defs>
 

@@ -24,14 +24,14 @@ export default function PodiumView({
         angle: 60,
         spread: 55,
         origin: { x: 0 },
-        colors: ['#fbbf24', '#f59e0b', '#8b5cf6', '#3b82f6', '#ec4899'],
+        colors: ['#ff5e00', '#ffb703', '#ff3b00', '#f59e0b', '#dc2626'],
       });
       confetti({
         particleCount: 4,
         angle: 120,
         spread: 55,
         origin: { x: 1 },
-        colors: ['#fbbf24', '#f59e0b', '#8b5cf6', '#3b82f6', '#ec4899'],
+        colors: ['#ff5e00', '#ffb703', '#ff3b00', '#f59e0b', '#dc2626'],
       });
 
       if (Date.now() < end) {

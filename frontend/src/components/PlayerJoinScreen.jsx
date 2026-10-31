@@ -64,7 +64,7 @@ export default function PlayerJoinScreen({
       customAvatar: customAvatar,
       avatar: customAvatar.bodyType, // string fallback
       team_name: isTeamMode ? selectedTeam.name : '',
-      team_color: isTeamMode ? selectedTeam.color : '#8b5cf6',
+      team_color: isTeamMode ? selectedTeam.color : '#ff6b00',
     });
   };
 

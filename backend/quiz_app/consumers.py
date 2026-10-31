@@ -70,7 +70,7 @@ class QuizConsumer(AsyncJsonWebsocketConsumer):
         else:
             avatar = str(payload.get("avatar", "🚀"))
         team_name = payload.get("team_name", "").strip()
-        team_color = payload.get("team_color", "#8b5cf6")
+        team_color = payload.get("team_color", "#ff6b00")
         is_host = payload.get("is_host", False)
 
         player_data = await self.create_or_get_player(nickname, avatar, team_name, team_color, is_host)
@@ -461,7 +461,7 @@ class QuizConsumer(AsyncJsonWebsocketConsumer):
         team_map = {}
         for p in players:
             t_name = p["team_name"] or "Independent"
-            t_color = p["team_color"] or "#8b5cf6"
+            t_color = p["team_color"] or "#ff6b00"
             if t_name not in team_map:
                 team_map[t_name] = {
                     "team_name": t_name,
@@ -504,7 +504,7 @@ class QuizConsumer(AsyncJsonWebsocketConsumer):
             team_map = {}
             for p in players:
                 t_name = p["team_name"] or "Independent"
-                t_color = p["team_color"] or "#8b5cf6"
+                t_color = p["team_color"] or "#ff6b00"
                 if t_name not in team_map:
                     team_map[t_name] = {"team_name": t_name, "team_color": t_color, "total_score": 0, "player_count": 0}
                 team_map[t_name]["total_score"] += p["score"]

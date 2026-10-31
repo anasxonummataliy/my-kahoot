@@ -156,7 +156,7 @@ def session_join(request, pin):
     else:
         avatar = request.data.get("avatar", "🚀")
     team_name = request.data.get("team_name", "").strip()
-    team_color = request.data.get("team_color", "#8b5cf6")
+    team_color = request.data.get("team_color", "#ff6b00")
 
     existing = session.players.filter(nickname__iexact=nickname).first()
     if existing:

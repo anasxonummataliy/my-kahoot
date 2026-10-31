@@ -104,7 +104,7 @@ export default function HostLobby({
               {Object.entries(teams).map(([teamName, teamPlayers]) => (
                 <div key={teamName} className="team-roster-card">
                   <div className="team-roster-header">
-                    <span className="team-color-indicator" style={{ backgroundColor: teamPlayers[0]?.team_color || '#8b5cf6' }} />
+                    <span className="team-color-indicator" style={{ backgroundColor: teamPlayers[0]?.team_color || '#ff6b00' }} />
                     <span className="team-title-name">{teamName}</span>
                     <span className="team-count-badge">{teamPlayers.length}</span>
                   </div>

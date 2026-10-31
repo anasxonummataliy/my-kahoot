@@ -2,19 +2,22 @@
   --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* Color Palette */
-  --bg-dark: #0a0614;
-  --bg-gradient: radial-gradient(circle at 50% 0%, #24134b 0%, #0c081c 65%, #06040e 100%);
-  --panel-bg: rgba(26, 17, 54, 0.78);
-  --panel-border: rgba(147, 112, 219, 0.22);
-  --card-bg: rgba(38, 26, 78, 0.65);
-  --card-hover: rgba(56, 38, 112, 0.85);
+  /* Black & Olov Rang (Flame Orange) Color Palette */
+  --bg-dark: #070608;
+  --bg-gradient: radial-gradient(circle at 50% -10%, #3a1503 0%, #180902 45%, #0a0608 80%, #050406 100%);
+  --panel-bg: rgba(18, 14, 18, 0.88);
+  --panel-border: rgba(255, 107, 0, 0.28);
+  --card-bg: rgba(28, 20, 24, 0.78);
+  --card-hover: rgba(42, 28, 34, 0.92);
+  --card-border: rgba(255, 122, 0, 0.35);
 
-  --accent-purple: #8b5cf6;
-  --accent-indigo: #6366f1;
-  --accent-glow: rgba(139, 92, 246, 0.4);
+  --accent-orange: #ff5e00;
+  --accent-fire: #ff6b00;
+  --accent-amber: #f59e0b;
+  --accent-glow: rgba(255, 94, 0, 0.45);
+  --flame-gradient: linear-gradient(135deg, #ff6b00 0%, #ea580c 55%, #dc2626 100%);
 
-  /* Kahoot Answer Colors */
+  /* Kahoot Answer Colors (vibrant for contrast) */
   --answer-blue: #2563eb;
   --answer-blue-glow: rgba(37, 99, 235, 0.45);
   --answer-red: #e11d48;
@@ -26,8 +29,8 @@
 
   /* Text Colors */
   --text-main: #ffffff;
-  --text-muted: #94a3b8;
-  --text-light: #cbd5e1;
+  --text-muted: #a8a29e;
+  --text-light: #e7e5e4;
 
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -71,33 +74,33 @@ input, select, textarea {
   outline: none;
 }
 
-/* Glassmorphism Panel Utilities */
+/* Glassmorphism Panel Utilities with Fiery Ember Accents */
 .glass-panel {
   background: var(--panel-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius-xl);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 25px rgba(255, 94, 0, 0.12), inset 0 1px 0 rgba(255, 180, 100, 0.15);
 }
 
 .glass-card {
   background: var(--card-bg);
   backdrop-filter: blur(14px);
-  border: 1px solid rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(255, 107, 0, 0.22);
   border-radius: var(--radius-lg);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   transition: all 0.25s ease;
 }
 
 .glass-card:hover {
-  border-color: rgba(167, 139, 250, 0.4);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 122, 0, 0.5);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 18px rgba(255, 107, 0, 0.25);
 }
 
-/* Gradient Primary Button */
+/* Flame Gradient Primary Button */
 .btn-primary {
-  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  background: linear-gradient(135deg, #ff6b00 0%, #ea580c 55%, #dc2626 100%);
   color: #ffffff;
   font-weight: 700;
   font-size: 1rem;
@@ -107,13 +110,13 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 6px 22px rgba(255, 106, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.22);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #9b6ef9 0%, #7579f5 100%);
-  box-shadow: 0 8px 28px rgba(124, 58, 237, 0.65);
+  background: linear-gradient(135deg, #ff7a00 0%, #f97316 55%, #ef4444 100%);
+  box-shadow: 0 8px 28px rgba(255, 106, 0, 0.75);
   transform: translateY(-2px);
 }
 
@@ -128,13 +131,13 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 107, 0, 0.15);
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 107, 0, 0.4);
 }
 
 /* Live Quiz Badge */
@@ -142,9 +145,9 @@ input, select, textarea {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(22, 163, 74, 0.18);
-  color: #4ade80;
-  border: 1px solid rgba(74, 222, 128, 0.35);
+  background: rgba(255, 107, 0, 0.15);
+  color: #ff9e00;
+  border: 1px solid rgba(255, 107, 0, 0.35);
   padding: 6px 14px;
   border-radius: 9999px;
   font-size: 0.85rem;
@@ -155,9 +158,9 @@ input, select, textarea {
 .live-dot {
   width: 8px;
   height: 8px;
-  background-color: #22c55e;
+  background-color: #ff6b00;
   border-radius: 50%;
-  box-shadow: 0 0 10px #22c55e;
+  box-shadow: 0 0 10px #ff6b00;
   animation: pulse-dot 1.8s infinite;
 }
 
@@ -166,29 +169,29 @@ input, select, textarea {
   50% { transform: scale(1.35); opacity: 0.7; }
 }
 
-/* Custom Scrollbar */
+/* Custom Fiery Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(10, 6, 20, 0.5);
+  background: rgba(10, 6, 8, 0.7);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(139, 92, 246, 0.3);
+  background: rgba(255, 107, 0, 0.4);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(139, 92, 246, 0.6);
+  background: rgba(255, 107, 0, 0.8);
 }
 
-/* Neon Glow Animations */
+/* Fiery Neon Glow Animations */
 @keyframes glow-pulse {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.35);
   }
   50% {
-    box-shadow: 0 0 35px rgba(139, 92, 246, 0.65);
+    box-shadow: 0 0 40px rgba(255, 107, 0, 0.75);
   }
 }
 

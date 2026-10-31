@@ -104,7 +104,7 @@ export default function PlayerGameView({
           <KahootAvatar avatar={player?.customAvatar || player?.avatar} size={28} />
           <span className="p-nick">{player?.nickname || 'Player #12'}</span>
           {isTeamMode && player?.team_name && (
-            <span className="p-team" style={{ backgroundColor: player.team_color || '#8b5cf6' }}>
+            <span className="p-team" style={{ backgroundColor: player.team_color || '#ff6b00' }}>
               {player.team_name}
             </span>
           )}

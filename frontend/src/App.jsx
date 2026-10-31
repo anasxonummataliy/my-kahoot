@@ -364,7 +364,7 @@ export default function App() {
       sorted.forEach((p) => {
         const t = p.team_name || 'Independent';
         if (!teamMap[t]) {
-          teamMap[t] = { team_name: t, team_color: p.team_color || '#8b5cf6', total_score: 0, player_count: 0 };
+          teamMap[t] = { team_name: t, team_color: p.team_color || '#ff6b00', total_score: 0, player_count: 0 };
         }
         teamMap[t].total_score += p.score || 0;
         teamMap[t].player_count += 1;
