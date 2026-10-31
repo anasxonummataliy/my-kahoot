@@ -1,21 +1,21 @@
 import React from 'react';
-import { Trophy, Volume2, VolumeX, Smartphone, Tablet, Laptop, Users, Monitor } from 'lucide-react';
+import { Trophy, Volume2, VolumeX, Users, UserCheck, Shield } from 'lucide-react';
 
 export default function Navbar({
   playersCount = 0,
   isMuted = false,
   onToggleMute,
-  viewMode = 'host',
-  setViewMode,
+  role = 'host', // 'host' or 'player'
+  onToggleRole,
   hostName = 'Host',
   pin = '',
 }) {
   return (
     <header className="navbar-container">
       {/* Brand Logo */}
-      <div className="brand-group" onClick={() => setViewMode('host')} style={{ cursor: 'pointer' }}>
+      <div className="brand-group" onClick={() => onToggleRole && onToggleRole('host')} style={{ cursor: 'pointer' }}>
         <div className="logo-icon-box">
-          <Trophy className="logo-trophy" size={26} />
+          <Trophy className="logo-trophy" size={24} />
         </div>
         <div className="brand-text">
           <h1 className="brand-title">QuizArena</h1>
@@ -27,7 +27,7 @@ export default function Navbar({
       <div className="navbar-center-pill">
         <span className="live-badge">
           <span className="live-dot" />
-          Live Quiz
+          <span className="live-label">Live Quiz</span>
         </span>
         {pin && (
           <span className="pin-badge">
@@ -36,65 +36,50 @@ export default function Navbar({
         )}
       </div>
 
-      {/* Right Controls & Device Switcher */}
+      {/* Right Controls */}
       <div className="navbar-right-group">
-        {/* Device Simulator Toggle (Allows instant testing of mobile / tablet player views!) */}
-        <div className="device-switcher" title="Switch device view for testing responsiveness">
-          <button
-            className={`device-btn ${viewMode === 'host' ? 'active' : ''}`}
-            onClick={() => setViewMode('host')}
-            title="Host Dashboard View"
-          >
-            <Monitor size={16} />
-            <span className="btn-label">Host</span>
-          </button>
-          <button
-            className={`device-btn ${viewMode === 'player-desktop' ? 'active' : ''}`}
-            onClick={() => setViewMode('player-desktop')}
-            title="Player View (Laptop)"
-          >
-            <Laptop size={16} />
-            <span className="btn-label">Laptop</span>
-          </button>
-          <button
-            className={`device-btn ${viewMode === 'player-tablet' ? 'active' : ''}`}
-            onClick={() => setViewMode('player-tablet')}
-            title="Player View (Tablet)"
-          >
-            <Tablet size={16} />
-            <span className="btn-label">Tablet</span>
-          </button>
-          <button
-            className={`device-btn ${viewMode === 'player-mobile' ? 'active' : ''}`}
-            onClick={() => setViewMode('player-mobile')}
-            title="Player View (Mobile Phone)"
-          >
-            <Smartphone size={16} />
-            <span className="btn-label">Mobile</span>
-          </button>
-        </div>
+        {/* Role Switcher Button: Lets the user switch between Host view and Player view */}
+        <button
+          className={`role-toggle-btn ${role === 'player' ? 'player-active' : 'host-active'}`}
+          onClick={() => onToggleRole && onToggleRole(role === 'host' ? 'player' : 'host')}
+          title="Boshlovchi va O'yinchi ko'rinishlari orasida o'tish"
+        >
+          {role === 'host' ? (
+            <>
+              <UserCheck size={16} />
+              <span className="role-btn-text">O'yinchiga o'tish</span>
+            </>
+          ) : (
+            <>
+              <Shield size={16} />
+              <span className="role-btn-text">Host paneliga o'tish</span>
+            </>
+          )}
+        </button>
 
         {/* Players Count Badge */}
-        <div className="players-counter-badge">
+        <div className="players-counter-badge" title="Ulangan o'yinchilar soni">
           <Users size={16} />
-          <span>Players: <strong>{playersCount}</strong></span>
+          <span><strong className="players-count-num">{playersCount}</strong> <span className="players-word">o'yinchi</span></span>
         </div>
 
         {/* Sound Toggle */}
         <button
           className="icon-circle-btn"
           onClick={onToggleMute}
-          title={isMuted ? 'Unmute Sound' : 'Mute Sound'}
+          title={isMuted ? 'Ovozni yoqish' : 'Ovozni o\'chirish'}
         >
           {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
         </button>
 
         {/* Host Profile Pill */}
-        <div className="host-profile-pill">
-          <div className="host-avatar">A</div>
-          <span className="host-name">{hostName}</span>
-          <span className="host-caret">▾</span>
-        </div>
+        {role === 'host' && (
+          <div className="host-profile-pill">
+            <div className="host-avatar">A</div>
+            <span className="host-name">{hostName}</span>
+            <span className="host-caret">▾</span>
+          </div>
+        )}
       </div>
     </header>
   );

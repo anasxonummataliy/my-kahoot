@@ -36,8 +36,12 @@ export default function App() {
   const [selectedOptionId, setSelectedOptionId] = useState(null);
   const [answerResult, setAnswerResult] = useState(null);
 
-  // UI View & Simulator States
-  const [viewMode, setViewMode] = useState('host'); // 'host' | 'player-desktop' | 'player-tablet' | 'player-mobile' | 'player-direct'
+  // Role State (Host vs Player)
+  const [role, setRole] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('pin') || params.get('mode') === 'player') return 'player';
+    return 'host';
+  });
   const [isMuted, setIsMuted] = useState(false);
   const [isQuizModalOpen, setIsQuizModalOpen] = useState(false);
   const [activeSidebarTab, setActiveSidebarTab] = useState('start');
@@ -54,14 +58,9 @@ export default function App() {
 
     if (pinParam) {
       setPin(pinParam);
-    }
-    if (modeParam === 'player' || (pinParam && !modeParam)) {
-      // Auto-switch to mobile player view if directly joined with pin
-      if (window.innerWidth < 768) {
-        setViewMode('player-direct');
-      } else {
-        setViewMode('player-mobile');
-      }
+      setRole('player');
+    } else if (modeParam === 'player') {
+      setRole('player');
     }
 
     // Initialize or fetch active session from Django backend
@@ -542,24 +541,24 @@ export default function App() {
           initialPin={pin}
           isTeamMode={isTeamMode}
           onJoin={handlePlayerJoin}
-          onBackToHost={() => setViewMode('host')}
+          onBackToHost={() => setRole('host')}
         />
       );
     }
 
     if (sessionStatus === 'lobby') {
       return (
-        <div className="player-waiting-view glass-panel" style={{ margin: '40px auto', padding: '36px', textAlign: 'center' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '12px' }}>{currentPlayer.avatar}</div>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 800 }}>Xush kelibsiz, {currentPlayer.nickname}!</h2>
+        <div className="player-waiting-view glass-panel">
+          <div className="waiting-avatar-emoji">{currentPlayer.avatar}</div>
+          <h2 className="waiting-welcome-title">Xush kelibsiz, {currentPlayer.nickname}!</h2>
           {isTeamMode && currentPlayer.team_name && (
-            <div style={{ margin: '12px 0' }}>
-              <span className="p-team" style={{ backgroundColor: currentPlayer.team_color, fontSize: '0.9rem', padding: '4px 14px' }}>
+            <div className="waiting-team-wrap">
+              <span className="p-team" style={{ backgroundColor: currentPlayer.team_color }}>
                 Jamoa: {currentPlayer.team_name}
               </span>
             </div>
           )}
-          <p style={{ color: '#c4b5fd', marginTop: '14px' }}>Boshlovchi o'yinni boshlashini kuting...</p>
+          <p className="waiting-hint-text">Boshlovchi o'yinni boshlashini kuting...</p>
         </div>
       );
     }
@@ -620,14 +619,14 @@ export default function App() {
         playersCount={players.length}
         isMuted={isMuted}
         onToggleMute={handleToggleMute}
-        viewMode={viewMode}
-        setViewMode={setViewMode}
+        role={role}
+        onToggleRole={(newRole) => setRole(newRole)}
         hostName="Host"
         pin={pin}
       />
 
-      {/* VIEW MODE 1: Host Dashboard (Matches screenshot layout!) */}
-      {viewMode === 'host' && (
+      {/* Main Content Area: Automatically responsive based on viewport width */}
+      {role === 'host' ? (
         <main className="host-layout-container">
           {/* Left Navigation Sidebar */}
           <Sidebar
@@ -674,7 +673,7 @@ export default function App() {
           )}
 
           {sessionStatus === 'leaderboard' && (
-            <div style={{ gridColumn: '2 / span 2' }}>
+            <div className="host-full-span-grid">
               <LeaderboardView
                 players={players}
                 teams={teams}
@@ -689,7 +688,7 @@ export default function App() {
           )}
 
           {sessionStatus === 'finished' && (
-            <div style={{ gridColumn: '2 / span 2' }}>
+            <div className="host-full-span-grid">
               <PodiumView
                 players={players}
                 teams={teams}
@@ -700,41 +699,10 @@ export default function App() {
             </div>
           )}
         </main>
-      )}
-
-      {/* VIEW MODE 2: Player Laptop Device Mockup */}
-      {viewMode === 'player-desktop' && (
-        <div className="simulator-wrapper">
-          <div className="device-frame-laptop">
-            {renderPlayerContent()}
-          </div>
-        </div>
-      )}
-
-      {/* VIEW MODE 3: Player Tablet Device Mockup (iPad in screenshot) */}
-      {viewMode === 'player-tablet' && (
-        <div className="simulator-wrapper">
-          <div className="device-frame-tablet">
-            {renderPlayerContent()}
-          </div>
-        </div>
-      )}
-
-      {/* VIEW MODE 4: Player Mobile Phone Mockup (iPhone in screenshot) */}
-      {viewMode === 'player-mobile' && (
-        <div className="simulator-wrapper">
-          <div className="device-frame-mobile">
-            <div className="device-notch" />
-            {renderPlayerContent()}
-          </div>
-        </div>
-      )}
-
-      {/* VIEW MODE 5: Direct Mobile Full View */}
-      {viewMode === 'player-direct' && (
-        <div style={{ width: '100%', minHeight: 'calc(100vh - 80px)' }}>
+      ) : (
+        <main className="player-layout-container">
           {renderPlayerContent()}
-        </div>
+        </main>
       )}
 
       {/* Quiz Manager & Creator Modal */}
