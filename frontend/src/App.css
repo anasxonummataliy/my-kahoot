@@ -248,18 +248,18 @@
 .sidebar-nav-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .sidebar-nav-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 12px 18px;
-  border-radius: var(--radius-md);
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
   color: var(--text-muted);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   background: transparent;
   width: 100%;
   text-align: left;
@@ -364,36 +364,36 @@
 
 .lobby-quiz-title {
   font-family: var(--font-display);
-  font-size: 2.2rem;
+  font-size: 1.7rem;
   font-weight: 800;
   color: #ffffff;
   letter-spacing: -0.5px;
 }
 
 .lobby-quiz-subtitle {
-  color: #c4b5fd;
-  font-size: 1.05rem;
-  margin-top: 6px;
+  color: #fed7aa;
+  font-size: 0.88rem;
+  margin-top: 4px;
 }
 
 /* Central Game PIN Card (Matching screenshot) */
 .game-pin-card {
   background: linear-gradient(180deg, #201008 0%, #110703 100%);
   border: 1.5px solid rgba(255, 107, 0, 0.45);
-  border-radius: 24px;
-  padding: 24px 60px;
+  border-radius: 20px;
+  padding: 16px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   margin-bottom: 12px;
   position: relative;
   z-index: 5;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 30px rgba(255, 107, 0, 0.25), inset 0 1px 0 rgba(255, 180, 100, 0.25);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65), 0 0 26px rgba(255, 107, 0, 0.22), inset 0 1px 0 rgba(255, 180, 100, 0.25);
 }
 
 .game-pin-label {
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: #ff9e00;
   text-transform: capitalize;
@@ -401,9 +401,9 @@
 
 .game-pin-number {
   font-family: var(--font-display);
-  font-size: 4rem;
+  font-size: 2.8rem;
   font-weight: 900;
-  letter-spacing: 6px;
+  letter-spacing: 4px;
   color: #ffffff;
   line-height: 1;
   text-shadow: 0 4px 20px rgba(255, 107, 0, 0.45);
@@ -415,9 +415,9 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 8px;
   transition: all 0.2s;
   border: 1px solid rgba(255, 107, 0, 0.2);
@@ -433,8 +433,8 @@
 .crowd-illustration-container {
   width: 100%;
   position: relative;
-  margin-top: -30px;
-  margin-bottom: 16px;
+  margin-top: -16px;
+  margin-bottom: 12px;
   pointer-events: none;
 }
 
@@ -443,8 +443,8 @@
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 220px;
-  height: 220px;
+  width: 160px;
+  height: 160px;
   background: radial-gradient(circle, rgba(255, 122, 0, 0.45) 0%, rgba(255, 60, 0, 0) 70%);
   border-radius: 50%;
   filter: blur(25px);
@@ -452,7 +452,7 @@
 
 .crowd-svg {
   width: 100%;
-  height: 200px;
+  height: 140px;
   display: block;
 }
 
@@ -572,19 +572,20 @@
    RIGHT SIDEBAR CARD (Game Progress & Start Question)
 ========================================================= */
 .lobby-right-card {
-  padding: 24px;
+  padding: 18px 20px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   height: fit-content;
   position: sticky;
   top: 96px;
+  border-radius: 18px;
 }
 
 .progress-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .progress-header {
@@ -594,7 +595,7 @@
 }
 
 .progress-title {
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--text-light);
 }
@@ -602,12 +603,12 @@
 .progress-fraction {
   font-weight: 700;
   color: #ffffff;
-  font-size: 1rem;
+  font-size: 0.92rem;
 }
 
 .progress-bar-track {
   width: 100%;
-  height: 8px;
+  height: 7px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 999px;
   overflow: hidden;
@@ -624,11 +625,11 @@
 .time-info-section {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 14px 18px;
-  border-radius: 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
 }
 
 .time-icon-wrapper {
@@ -641,12 +642,12 @@
 }
 
 .time-label {
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   color: var(--text-muted);
 }
 
 .time-value {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #ffffff;
 }
@@ -655,11 +656,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
+  padding: 9px 12px;
   background: rgba(255, 107, 0, 0.12);
   border: 1px solid rgba(255, 107, 0, 0.3);
-  border-radius: 12px;
-  font-size: 0.85rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
   color: #fed7aa;
 }
 
@@ -675,8 +676,10 @@
 
 .start-question-btn {
   width: 100%;
-  padding: 16px;
-  font-size: 1.05rem;
+  padding: 12px 18px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  border-radius: 12px;
   letter-spacing: 0.2px;
 }
 
@@ -685,13 +688,13 @@
 ========================================================= */
 .host-question-container {
   grid-column: 2;
-  padding: 36px 40px;
+  padding: 26px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   text-align: center;
-  min-height: 580px;
+  min-height: 480px;
 }
 
 .host-q-header {
@@ -699,29 +702,29 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .host-q-indicator {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .q-badge {
   background: rgba(255, 107, 0, 0.22);
   border: 1px solid rgba(255, 107, 0, 0.45);
   color: #ffffff;
-  padding: 6px 16px;
+  padding: 5px 14px;
   border-radius: 999px;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .points-badge {
   color: #fbbf24;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .answered-tracker-pill {
@@ -730,21 +733,21 @@
   gap: 8px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 6px 16px;
+  padding: 5px 14px;
   border-radius: 999px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #e2e8f0;
 }
 
 /* Center Timer Ring */
 .timer-ring-wrapper {
   position: relative;
-  width: 104px;
-  height: 104px;
+  width: 90px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .timer-svg {
@@ -771,7 +774,7 @@
 
 .timer-number {
   font-family: var(--font-display);
-  font-size: 2.2rem;
+  font-size: 1.85rem;
   font-weight: 800;
   color: #ffffff;
   z-index: 2;
@@ -783,42 +786,42 @@
 }
 
 .host-question-text-box {
-  margin-bottom: 36px;
+  margin-bottom: 20px;
   max-width: 800px;
 }
 
 .host-main-question {
   font-family: var(--font-display);
-  font-size: 2.1rem;
+  font-size: 1.55rem;
   font-weight: 800;
   color: #ffffff;
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 /* 4 Answer Cards Grid (Screenshot Layout!) */
 .host-answers-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
 }
 
 .host-answer-card {
-  border-radius: 18px;
-  padding: 24px 28px;
+  border-radius: 14px;
+  padding: 13px 18px;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
   color: #ffffff;
   position: relative;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  min-height: 84px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+  min-height: 58px;
   text-align: left;
 }
 
 .card-shape-icon {
-  font-size: 1.8rem;
+  font-size: 1.25rem;
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -828,8 +831,9 @@
 
 .card-answer-text {
   font-family: var(--font-sans);
-  font-size: 1.35rem;
+  font-size: 1.02rem;
   font-weight: 700;
+  line-height: 1.3;
   flex: 1;
 }
 
@@ -892,25 +896,26 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 32px;
-  padding-top: 20px;
+  margin-top: 20px;
+  padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 12px;
 }
 
 .review-buttons-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 /* =========================================================
    PLAYER GAME VIEW (The Essential Requirement!)
 ========================================================= */
 .player-game-container {
-  max-width: 900px;
+  max-width: 840px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px;
+  padding: 20px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -931,7 +936,7 @@
   gap: 8px;
   color: #ffffff;
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .top-trophy-icon {
@@ -944,9 +949,9 @@
   gap: 8px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 5px 14px;
+  padding: 4px 12px;
   border-radius: 999px;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
 }
 
 .p-nick {
@@ -965,15 +970,15 @@
 .player-progress-counter {
   font-weight: 800;
   color: #cbd5e1;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .player-progress-bar-track {
   width: 100%;
-  height: 6px;
+  height: 5px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 999px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   overflow: hidden;
 }
 
@@ -987,12 +992,12 @@
 /* Player Circular Timer */
 .player-timer-container {
   position: relative;
-  width: 90px;
-  height: 90px;
+  width: 78px;
+  height: 78px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 .player-timer-svg {
@@ -1014,7 +1019,7 @@
 
 .player-timer-number {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 800;
   color: #ffffff;
   z-index: 2;
@@ -1022,17 +1027,17 @@
 
 /* Question displayed on Player Device! */
 .player-question-box {
-  margin-bottom: 28px;
+  margin-bottom: 18px;
   text-align: center;
-  max-width: 750px;
+  max-width: 680px;
 }
 
 .player-question-text {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 1.45rem;
   font-weight: 800;
   color: #ffffff;
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .player-locked-banner {
@@ -1119,28 +1124,28 @@
 .player-answers-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
 }
 
 .player-answer-btn {
-  border-radius: 18px;
-  padding: 24px 24px;
+  border-radius: 14px;
+  padding: 13px 18px;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
   color: #ffffff;
   position: relative;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 84px;
+  min-height: 58px;
   text-align: left;
 }
 
 .player-answer-btn:hover:not(:disabled) {
   transform: translateY(-2px);
   filter: brightness(1.1);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
 }
 
 .player-answer-btn:active:not(:disabled) {
@@ -1148,14 +1153,15 @@
 }
 
 .answer-shape-symbol {
-  font-size: 1.8rem;
+  font-size: 1.25rem;
   color: #ffffff;
 }
 
 .answer-title-text {
   font-family: var(--font-sans);
-  font-size: 1.35rem;
+  font-size: 1.02rem;
   font-weight: 700;
+  line-height: 1.3;
   flex: 1;
 }
 
@@ -1895,21 +1901,22 @@
 
 .join-card {
   width: 100%;
-  max-width: 460px;
-  padding: 36px 32px;
+  max-width: 430px;
+  padding: 26px 28px;
   text-align: center;
+  border-radius: 20px;
 }
 
 .join-logo-wrap {
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
   background: linear-gradient(135deg, #ff6b00 0%, #ea580c 55%, #dc2626 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 16px;
-  box-shadow: 0 8px 24px rgba(255, 107, 0, 0.55);
+  margin: 0 auto 12px;
+  box-shadow: 0 6px 20px rgba(255, 107, 0, 0.5);
 }
 
 .join-trophy {
@@ -1918,32 +1925,32 @@
 
 .join-title {
   font-family: var(--font-display);
-  font-size: 1.8rem;
+  font-size: 1.55rem;
   font-weight: 800;
   color: #ffffff;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .join-subtitle {
   color: var(--text-muted);
-  font-size: 0.95rem;
-  margin-bottom: 24px;
+  font-size: 0.88rem;
+  margin-bottom: 18px;
 }
 
 .join-error-banner {
   background: rgba(239, 68, 68, 0.15);
   border: 1px solid rgba(239, 68, 68, 0.35);
   color: #fca5a5;
-  padding: 10px 14px;
+  padding: 8px 12px;
   border-radius: 10px;
-  font-size: 0.88rem;
-  margin-bottom: 16px;
+  font-size: 0.82rem;
+  margin-bottom: 14px;
 }
 
 .join-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
   text-align: left;
 }
 
@@ -1953,25 +1960,25 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 12px;
   background: rgba(255, 107, 0, 0.08);
   border: 1px solid rgba(255, 107, 0, 0.25);
-  border-radius: 18px;
-  margin-bottom: 6px;
+  border-radius: 16px;
+  margin-bottom: 4px;
 }
 
 .join-avatar-box {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .avatar-quick-actions {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
 }
 
@@ -1981,19 +1988,19 @@
   gap: 6px;
   background: linear-gradient(135deg, #ff6b00 0%, #ea580c 55%, #dc2626 100%);
   color: #ffffff;
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
   border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 0 4px 14px rgba(255, 107, 0, 0.45);
+  box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
 .btn-spin-quick:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 6px 20px rgba(255, 107, 0, 0.65);
+  transform: translateY(-1.5px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(255, 107, 0, 0.6);
 }
 
 .btn-spin-quick.spinning svg {
@@ -2006,9 +2013,9 @@
   gap: 6px;
   background: rgba(255, 255, 255, 0.08);
   color: #fed7aa;
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
   border: 1px solid rgba(255, 107, 0, 0.3);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -2019,17 +2026,17 @@
   background: rgba(255, 107, 0, 0.2);
   color: #ffffff;
   border-color: rgba(255, 107, 0, 0.5);
-  transform: translateY(-2px);
+  transform: translateY(-1.5px);
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .form-label {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-light);
   display: flex;
@@ -2040,13 +2047,13 @@
 .input-pin-field {
   background: rgba(255, 255, 255, 0.06);
   border: 1.5px solid rgba(255, 107, 0, 0.45);
-  border-radius: 14px;
-  padding: 14px;
+  border-radius: 12px;
+  padding: 10px 14px;
   color: #ffffff;
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.45rem;
   font-weight: 800;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   text-align: center;
   transition: all 0.2s;
 }
@@ -2054,23 +2061,23 @@
 .input-pin-field:focus {
   border-color: #ff6b00;
   background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 22px rgba(255, 107, 0, 0.5);
+  box-shadow: 0 0 20px rgba(255, 107, 0, 0.45);
 }
 
 .input-text-field {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  padding: 12px 16px;
+  border-radius: 10px;
+  padding: 9px 14px;
   color: #ffffff;
-  font-size: 1rem;
+  font-size: 0.92rem;
   transition: all 0.2s;
 }
 
 .input-text-field:focus {
   border-color: #ff9e00;
   background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 16px rgba(255, 107, 0, 0.35);
+  box-shadow: 0 0 14px rgba(255, 107, 0, 0.35);
 }
 
 .avatar-grid {
@@ -2115,9 +2122,9 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 8px 10px;
   color: #ffffff;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   transition: all 0.2s;
 }
@@ -2130,9 +2137,11 @@
 
 .join-submit-btn {
   width: 100%;
-  padding: 14px;
-  font-size: 1.05rem;
-  margin-top: 8px;
+  padding: 11px 18px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  border-radius: 12px;
+  margin-top: 6px;
 }
 
 .join-footer-back {
@@ -2722,18 +2731,52 @@
    COMPREHENSIVE FLUID AUTO-RESPONSIVE SYSTEM
 ========================================================= */
 
-/* --- 1. Laptop & Small Desktop (<= 1200px) --- */
+/* --- 1. Laptop & Medium Desktop (<= 1200px) --- */
 @media (max-width: 1200px) {
   .host-layout-container {
     grid-template-columns: 210px 1fr;
-    gap: 20px;
-    padding: 20px 24px;
+    gap: 16px;
+    padding: 18px 20px;
+  }
+
+  .lobby-quiz-title {
+    font-size: 1.55rem;
+  }
+
+  .lobby-quiz-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .game-pin-number {
+    font-size: 2.5rem;
+  }
+
+  .game-pin-card {
+    padding: 14px 32px;
+  }
+
+  .host-main-question {
+    font-size: 1.45rem;
+  }
+
+  .host-answer-card {
+    padding: 12px 16px;
+    min-height: 54px;
+    gap: 10px;
+  }
+
+  .card-shape-icon {
+    font-size: 1.2rem;
+  }
+
+  .card-answer-text {
+    font-size: 0.98rem;
   }
 
   .lobby-right-card {
     grid-column: 2;
     position: static;
-    margin-top: 10px;
+    margin-top: 8px;
   }
 
   .host-full-span-grid {
@@ -2741,7 +2784,25 @@
   }
 
   .player-layout-container {
-    max-width: 840px;
+    max-width: 800px;
+  }
+
+  .player-question-text {
+    font-size: 1.35rem;
+  }
+
+  .player-answer-btn {
+    padding: 12px 16px;
+    min-height: 54px;
+    gap: 10px;
+  }
+
+  .answer-shape-symbol {
+    font-size: 1.2rem;
+  }
+
+  .answer-title-text {
+    font-size: 0.98rem;
   }
 }
 
@@ -2749,39 +2810,44 @@
 @media (max-width: 960px) {
   .navbar-container {
     padding: 0 16px;
-    height: 64px;
+    height: 58px;
   }
 
   .brand-tagline {
     display: none;
   }
 
+  .brand-title {
+    font-size: 1.15rem;
+  }
+
   .host-layout-container {
     display: flex;
     flex-direction: column;
-    padding: 16px;
-    gap: 16px;
+    padding: 12px;
+    gap: 12px;
   }
 
   .sidebar-container {
     height: auto;
     position: static;
-    padding: 8px 12px;
+    padding: 6px 8px;
   }
 
   .sidebar-nav-list {
     flex-direction: row;
     overflow-x: auto;
     width: 100%;
-    gap: 8px;
-    padding-bottom: 4px;
+    gap: 6px;
+    padding-bottom: 2px;
   }
 
   .sidebar-nav-item {
-    padding: 8px 14px;
-    font-size: 0.85rem;
+    padding: 7px 12px;
+    font-size: 0.82rem;
     white-space: nowrap;
     width: auto;
+    border-radius: 8px;
   }
 
   .sidebar-divider,
@@ -2791,50 +2857,89 @@
 
   .host-question-container {
     grid-column: auto;
-    padding: 28px 20px;
+    padding: 20px 14px;
     min-height: auto;
   }
 
   .host-main-question {
-    font-size: 1.7rem;
+    font-size: 1.3rem;
   }
 
   .player-layout-container {
-    max-width: 720px;
-    padding: 16px 12px;
+    max-width: 680px;
+    padding: 12px 8px;
   }
 
   .player-question-text {
-    font-size: 1.65rem;
+    font-size: 1.25rem;
   }
 
   .lobby-quiz-title {
-    font-size: 1.8rem;
+    font-size: 1.35rem;
+  }
+
+  .lobby-quiz-subtitle {
+    font-size: 0.82rem;
   }
 
   .game-pin-number {
-    font-size: clamp(2.8rem, 8vw, 3.8rem);
+    font-size: clamp(2.1rem, 6vw, 2.5rem);
+    letter-spacing: 3.5px;
   }
 
   .game-pin-card {
-    padding: 20px 36px;
-  }
-}
-
-/* --- 3. Mobile Phones (<= 640px) (Matches phone mockup in user's image!) --- */
-@media (max-width: 640px) {
-  .navbar-container {
-    padding: 0 12px;
-    height: 58px;
+    padding: 12px 24px;
   }
 
-  .brand-title {
+  .host-answers-grid,
+  .player-answers-grid {
+    gap: 10px;
+  }
+
+  .host-answer-card,
+  .player-answer-btn {
+    min-height: 50px;
+    padding: 11px 14px;
+    gap: 9px;
+    border-radius: 12px;
+  }
+
+  .card-shape-icon,
+  .answer-shape-symbol {
     font-size: 1.15rem;
   }
 
+  .card-answer-text,
+  .answer-title-text {
+    font-size: 0.92rem;
+  }
+
+  .btn-primary {
+    padding: 9px 18px;
+    font-size: 0.88rem;
+  }
+
+  .start-question-btn {
+    padding: 11px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* --- 3. Mobile Phones (<= 640px) --- */
+@media (max-width: 640px) {
+  .navbar-container {
+    padding: 0 12px;
+    height: 52px;
+  }
+
+  .brand-title {
+    font-size: 1.05rem;
+  }
+
   .logo-icon-box {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
   }
 
   .live-label,
@@ -2843,18 +2948,19 @@
   }
 
   .live-badge {
-    padding: 5px 8px;
+    padding: 3px 7px;
+    font-size: 0.74rem;
   }
 
   .players-counter-badge {
-    padding: 6px 10px;
-    font-size: 0.82rem;
+    padding: 4px 8px;
+    font-size: 0.76rem;
   }
 
   .role-toggle-btn {
-    padding: 6px 12px;
-    font-size: 0.78rem;
-    gap: 5px;
+    padding: 5px 10px;
+    font-size: 0.76rem;
+    gap: 4px;
   }
 
   .host-profile-pill {
@@ -2863,40 +2969,54 @@
 
   /* Host Lobby on Mobile */
   .lobby-center-stage {
-    padding: 20px 14px;
+    padding: 14px 10px;
+  }
+
+  .lobby-heading-block {
+    margin-bottom: 14px;
   }
 
   .lobby-quiz-title {
-    font-size: 1.4rem;
+    font-size: 1.18rem;
   }
 
   .lobby-quiz-subtitle {
-    font-size: 0.88rem;
+    font-size: 0.78rem;
   }
 
   .game-pin-card {
-    padding: 16px 20px;
+    padding: 10px 16px;
     width: 100%;
-    border-radius: 18px;
+    border-radius: 14px;
+    margin-bottom: 6px;
+  }
+
+  .game-pin-label {
+    font-size: 0.78rem;
   }
 
   .game-pin-number {
-    font-size: clamp(2.2rem, 11vw, 3.2rem);
-    letter-spacing: 3px;
+    font-size: clamp(1.8rem, 8vw, 2.2rem);
+    letter-spacing: 2.5px;
+  }
+
+  .copy-link-btn {
+    padding: 3px 8px;
+    font-size: 0.76rem;
   }
 
   .crowd-illustration-container {
-    margin-top: -10px;
-    margin-bottom: 8px;
+    margin-top: -6px;
+    margin-bottom: 4px;
   }
 
   .crowd-svg {
-    height: 120px;
+    height: 85px;
   }
 
   .trophy-ambient-glow {
-    width: 140px;
-    height: 140px;
+    width: 100px;
+    height: 100px;
   }
 
   .teams-roster-grid {
@@ -2904,144 +3024,345 @@
   }
 
   .lobby-right-card {
-    padding: 18px;
+    padding: 14px;
   }
 
-  /* Player Game View on Mobile - 100% Matching iPhone Screen */
+  .start-question-btn {
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    border-radius: 10px;
+  }
+
+  /* Host Question View on Mobile */
+  .host-question-container {
+    padding: 14px 10px;
+  }
+
+  .host-main-question {
+    font-size: 1.12rem;
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+
+  .timer-ring-wrapper {
+    width: 66px;
+    height: 66px;
+    margin-bottom: 12px;
+  }
+
+  .timer-svg {
+    width: 66px;
+    height: 66px;
+    viewBox: 0 0 104 104;
+  }
+
+  .timer-number {
+    font-size: 1.35rem;
+  }
+
+  .host-answers-grid {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .host-answer-card {
+    padding: 9px 13px;
+    min-height: 44px;
+    border-radius: 10px;
+    gap: 8px;
+  }
+
+  .card-shape-icon {
+    font-size: 1.05rem;
+  }
+
+  .card-answer-text {
+    font-size: 0.88rem;
+    line-height: 1.25;
+  }
+
+  /* Host Review Actions on Mobile */
+  .host-review-actions-bar {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 10px;
+  }
+
+  .review-buttons-group {
+    width: 100%;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .host-review-actions-bar .btn-primary,
+  .host-review-actions-bar .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 9px 14px;
+    font-size: 0.85rem;
+  }
+
+  /* Player Game View on Mobile - Sleek, Proportionate Phone Layout */
   .player-game-container {
-    padding: 12px 6px;
+    padding: 8px 4px;
   }
 
   .player-top-bar {
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .player-brand-badge {
-    font-size: 0.95rem;
+    font-size: 0.86rem;
   }
 
   .player-identity-pill {
-    padding: 4px 10px;
-    font-size: 0.78rem;
+    padding: 3px 7px;
+    font-size: 0.74rem;
   }
 
   .player-timer-container {
-    width: 76px;
-    height: 76px;
-    margin-bottom: 16px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 12px;
   }
 
   .player-timer-svg {
-    width: 76px;
-    height: 76px;
+    width: 64px;
+    height: 64px;
     viewBox: 0 0 90 90;
   }
 
   .player-timer-number {
-    font-size: 1.65rem;
+    font-size: 1.35rem;
   }
 
   .player-question-box {
-    margin-bottom: 18px;
-    padding: 0 8px;
+    margin-bottom: 12px;
+    padding: 0 4px;
   }
 
   .player-question-text {
-    font-size: 1.35rem;
-    line-height: 1.3;
+    font-size: 1.12rem;
+    line-height: 1.35;
   }
 
-  /* 4 Answer Cards: Single column stack on smartphone (Matches screenshot!) */
+  /* 4 Answer Cards: Single column stack, perfectly proportioned, not overly tall */
   .player-answers-grid {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 7px;
     width: 100%;
   }
 
   .player-answer-btn {
-    padding: 16px 18px;
-    min-height: 62px;
-    border-radius: 14px;
-    gap: 14px;
-  }
-
-  .answer-shape-symbol {
-    font-size: 1.5rem;
-  }
-
-  .answer-title-text {
-    font-size: 1.15rem;
-  }
-
-  /* Host Question View on Mobile */
-  .host-answers-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .host-answer-card {
-    padding: 16px 18px;
-    min-height: 62px;
-  }
-
-  .card-answer-text {
-    font-size: 1.15rem;
-  }
-
-  /* Leaderboard on Mobile */
-  .leaderboard-container {
-    padding: 20px 14px;
-  }
-
-  .leaderboard-title-group h2 {
-    font-size: 1.35rem;
-  }
-
-  .team-standing-card {
-    padding: 14px 16px;
-  }
-
-  .player-standing-row {
-    padding: 10px 14px;
-    gap: 10px;
-  }
-
-  /* Podium on Mobile */
-  .podium-view-container {
-    padding: 24px 12px;
-  }
-
-  .podium-title {
-    font-size: 1.8rem;
-  }
-
-  .podium-stage {
-    height: 300px;
+    padding: 9px 13px;
+    min-height: 44px;
+    border-radius: 10px;
     gap: 8px;
   }
 
-  .podium-col {
-    width: 31%;
+  .answer-shape-symbol {
+    font-size: 1.05rem;
   }
 
-  .pedestal-1 { height: 160px; }
-  .pedestal-2 { height: 120px; }
-  .pedestal-3 { height: 90px; }
-
-  .avatar-big {
-    font-size: 2.2rem;
-  }
-
-  .pedestal-rank {
-    font-size: 2rem;
+  .answer-title-text {
+    font-size: 0.88rem;
+    line-height: 1.25;
   }
 
   /* Join Screen on Mobile */
   .join-card {
-    padding: 24px 18px;
+    padding: 18px 14px;
+    max-width: 100%;
+    border-radius: 16px;
+  }
+
+  .join-logo-wrap {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+  }
+
+  .join-title {
+    font-size: 1.22rem;
+    margin-bottom: 3px;
+  }
+
+  .join-subtitle {
+    font-size: 0.78rem;
+    margin-bottom: 14px;
+  }
+
+  .avatar-join-preview-card {
+    padding: 10px;
+    margin-bottom: 4px;
+  }
+
+  .btn-spin-quick,
+  .btn-studio-quick {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  .input-pin-field {
+    font-size: 1.25rem;
+    padding: 8px 10px;
+    letter-spacing: 2px;
+    border-radius: 10px;
+  }
+
+  .input-text-field {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+    border-radius: 8px;
+  }
+
+  .form-label {
+    font-size: 0.78rem;
+  }
+
+  .form-group {
+    gap: 3px;
   }
 
   .team-selector-grid {
     grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .team-select-card {
+    padding: 7px 9px;
+    font-size: 0.78rem;
+  }
+
+  .join-submit-btn {
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    border-radius: 10px;
+  }
+
+  /* Avatar Studio on Mobile */
+  .avatar-studio-box {
+    padding: 14px 10px;
+    border-radius: 16px;
+  }
+
+  .studio-title {
+    font-size: 0.95rem;
+  }
+
+  .btn-randomize-dice {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  .avatar-preview-stage {
+    min-height: 150px;
+    padding: 8px 0 4px;
+  }
+
+  .avatar-speech-bubble {
+    font-size: 0.74rem;
+    padding: 5px 10px;
+  }
+
+  .studio-tab-btn {
+    padding: 6px 7px;
+    font-size: 0.72rem;
+  }
+
+  .feature-picker-grid {
+    grid-template-columns: repeat(auto-fill, minmax(58px, 1fr));
+    gap: 5px;
+  }
+
+  .feature-pick-card {
+    padding: 5px 2px;
+  }
+
+  .picker-text-label {
+    font-size: 0.65rem;
+  }
+
+  /* Leaderboard on Mobile */
+  .leaderboard-container {
+    padding: 14px 10px;
+  }
+
+  .leaderboard-title-group h2 {
+    font-size: 1.18rem;
+  }
+
+  .team-standing-card {
+    padding: 10px 12px;
+  }
+
+  .player-standing-row {
+    padding: 8px 10px;
+    gap: 7px;
+  }
+
+  /* Podium on Mobile */
+  .podium-view-container {
+    padding: 16px 8px;
+  }
+
+  .podium-title {
+    font-size: 1.45rem;
+  }
+
+  .podium-stage {
+    height: 260px;
+    gap: 5px;
+  }
+
+  .podium-col {
+    width: 32%;
+  }
+
+  .pedestal-1 { height: 140px; }
+  .pedestal-2 { height: 100px; }
+  .pedestal-3 { height: 75px; }
+
+  .avatar-big {
+    font-size: 1.8rem;
+  }
+
+  .pedestal-rank {
+    font-size: 1.6rem;
+  }
+}
+
+/* --- 4. Extra Compact Screens (<= 380px) --- */
+@media (max-width: 380px) {
+  .brand-title {
+    font-size: 0.95rem;
+  }
+
+  .player-answer-btn,
+  .host-answer-card {
+    padding: 8px 10px;
+    min-height: 40px;
+    gap: 7px;
+  }
+
+  .answer-title-text,
+  .card-answer-text {
+    font-size: 0.82rem;
+  }
+
+  .answer-shape-symbol,
+  .card-shape-icon {
+    font-size: 0.95rem;
+  }
+
+  .game-pin-number {
+    font-size: 1.75rem;
+  }
+
+  .host-main-question,
+  .player-question-text {
+    font-size: 1.02rem;
   }
 }
