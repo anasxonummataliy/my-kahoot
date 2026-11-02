@@ -125,13 +125,13 @@ def quiz_detail(request, pk):
 
     if request.method == "DELETE":
         # Permission check: Only creator or staff can delete the quiz
-        if not user or (quiz.creator and quiz.creator != user and not user.is_staff):
+        if quiz.creator and (not user or (quiz.creator != user and not user.is_staff)):
             return Response({"error": "Sizda ushbu quizni o'chirish huquqi yo'q!"}, status=status.HTTP_403_FORBIDDEN)
         quiz.delete()
         return Response({"success": True, "message": "Quiz o'chirildi"})
 
     elif request.method == "PUT":
-        if not user or (quiz.creator and quiz.creator != user and not user.is_staff):
+        if quiz.creator and (not user or (quiz.creator != user and not user.is_staff)):
             return Response({"error": "Sizda ushbu quizni tahrirlash huquqi yo'q!"}, status=status.HTTP_403_FORBIDDEN)
 
         data = request.data

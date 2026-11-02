@@ -11,6 +11,8 @@ import {
   Search,
   Layers,
   ChevronDown,
+  ChevronUp,
+  GripVertical,
   Trophy,
   FileText,
   Check,
@@ -21,6 +23,19 @@ import {
   HelpCircle,
 } from 'lucide-react';
 import { soundManager } from '../utils/soundEffects';
+
+const createBlankQuestion = (order = 1) => ({
+  _id: `q_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
+  question_text: '',
+  time_limit: 20,
+  points: 1000,
+  options: [
+    { option_text: '', is_correct: true, color: 'blue', shape: 'triangle' },
+    { option_text: '', is_correct: false, color: 'red', shape: 'diamond' },
+    { option_text: '', is_correct: false, color: 'orange', shape: 'circle' },
+    { option_text: '', is_correct: false, color: 'green', shape: 'square' },
+  ],
+});
 
 export default function QuizManagerModal({
   isOpen,
@@ -37,22 +52,14 @@ export default function QuizManagerModal({
   const [activeMenuId, setActiveMenuId] = useState(null);
   const [editingQuizId, setEditingQuizId] = useState(null);
 
+  // Drag and drop state
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
+
   // New / Edit Quiz Form State
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [questions, setQuestions] = useState([
-    {
-      question_text: '',
-      time_limit: 20,
-      points: 1000,
-      options: [
-        { option_text: '', is_correct: true, color: 'blue', shape: 'triangle' },
-        { option_text: '', is_correct: false, color: 'red', shape: 'diamond' },
-        { option_text: '', is_correct: false, color: 'orange', shape: 'circle' },
-        { option_text: '', is_correct: false, color: 'green', shape: 'square' },
-      ],
-    },
-  ]);
+  const [questions, setQuestions] = useState([createBlankQuestion(1)]);
 
   useEffect(() => {
     if (isOpen) {
@@ -93,19 +100,7 @@ export default function QuizManagerModal({
     setEditingQuizId(null);
     setTitle('');
     setDescription('');
-    setQuestions([
-      {
-        question_text: '',
-        time_limit: 20,
-        points: 1000,
-        options: [
-          { option_text: '', is_correct: true, color: 'blue', shape: 'triangle' },
-          { option_text: '', is_correct: false, color: 'red', shape: 'diamond' },
-          { option_text: '', is_correct: false, color: 'orange', shape: 'circle' },
-          { option_text: '', is_correct: false, color: 'green', shape: 'square' },
-        ],
-      },
-    ]);
+    setQuestions([createBlankQuestion(1)]);
     setActiveTab('create');
   };
 
@@ -125,22 +120,29 @@ export default function QuizManagerModal({
         const fullQuiz = await res.json();
         if (fullQuiz.questions && fullQuiz.questions.length > 0) {
           setQuestions(
-            fullQuiz.questions.map((q) => ({
-              question_text: q.question_text,
+            fullQuiz.questions.map((q, idx) => ({
+              _id: `q_${q.id || Date.now()}_${idx}`,
+              id: q.id,
+              question_text: q.question_text || '',
               time_limit: q.time_limit || 20,
               points: q.points || 1000,
-              options: (q.options || []).map((opt) => ({
-                option_text: opt.option_text,
+              options: (q.options || []).map((opt, oIdx) => ({
+                _id: `opt_${opt.id || Date.now()}_${oIdx}`,
+                id: opt.id,
+                option_text: opt.option_text || '',
                 is_correct: Boolean(opt.is_correct),
                 color: opt.color || 'blue',
                 shape: opt.shape || 'triangle',
               })),
             }))
           );
+        } else {
+          setQuestions([createBlankQuestion(1)]);
         }
       }
     } catch (e) {
       console.warn('Error fetching quiz details for edit:', e);
+      setQuestions([createBlankQuestion(1)]);
     }
 
     setActiveTab('create');
@@ -148,26 +150,63 @@ export default function QuizManagerModal({
 
   const handleAddQuestion = () => {
     soundManager.playClick();
-    setQuestions([
-      ...questions,
-      {
-        question_text: '',
-        time_limit: 20,
-        points: 1000,
-        options: [
-          { option_text: '', is_correct: true, color: 'blue', shape: 'triangle' },
-          { option_text: '', is_correct: false, color: 'red', shape: 'diamond' },
-          { option_text: '', is_correct: false, color: 'orange', shape: 'circle' },
-          { option_text: '', is_correct: false, color: 'green', shape: 'square' },
-        ],
-      },
-    ]);
+    setQuestions((prev) => [...prev, createBlankQuestion(prev.length + 1)]);
   };
 
   const handleRemoveQuestion = (idx) => {
     soundManager.playClick();
-    if (questions.length <= 1) return;
-    setQuestions(questions.filter((_, i) => i !== idx));
+    if (questions.length <= 1) {
+      // If only 1 question remains, reset it to clean state
+      setQuestions([createBlankQuestion(1)]);
+      return;
+    }
+    setQuestions((prev) => prev.filter((_, i) => i !== idx));
+  };
+
+  // Drag and drop handlers
+  const handleDragStart = (e, index) => {
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', String(index));
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    if (dragOverIndex !== index) {
+      setDragOverIndex(index);
+    }
+  };
+
+  const handleDrop = (e, targetIndex) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === targetIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+    const updated = [...questions];
+    const [removed] = updated.splice(draggedIndex, 1);
+    updated.splice(targetIndex, 0, removed);
+    setQuestions(updated);
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+    soundManager.playClick();
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleMoveQuestion = (index, direction) => {
+    const targetIndex = index + direction;
+    if (targetIndex < 0 || targetIndex >= questions.length) return;
+    const updated = [...questions];
+    const [removed] = updated.splice(index, 1);
+    updated.splice(targetIndex, 0, removed);
+    setQuestions(updated);
+    soundManager.playClick();
   };
 
   const handleDeleteQuiz = async (quizId, e) => {
@@ -393,19 +432,54 @@ export default function QuizManagerModal({
                 </div>
 
                 {questions.map((q, qIndex) => (
-                  <div key={qIndex} className="question-builder-card glass-card">
+                  <div
+                    key={q._id || `q_${qIndex}`}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, qIndex)}
+                    onDragOver={(e) => handleDragOver(e, qIndex)}
+                    onDrop={(e) => handleDrop(e, qIndex)}
+                    onDragEnd={handleDragEnd}
+                    className={`question-builder-card glass-card ${draggedIndex === qIndex ? 'is-dragging' : ''} ${dragOverIndex === qIndex ? 'is-drag-over' : ''}`}
+                  >
                     <div className="qb-header">
-                      <h4>Savol #{qIndex + 1}</h4>
-                      {questions.length > 1 && (
+                      <div className="qb-header-left">
+                        <span
+                          className="qb-drag-handle"
+                          title="Savol tartibini o'zgartirish uchun torting (Drag & Drop)"
+                        >
+                          <GripVertical size={18} />
+                        </span>
+                        <h4>Savol #{qIndex + 1}</h4>
+                      </div>
+
+                      <div className="qb-header-actions">
+                        <button
+                          type="button"
+                          disabled={qIndex === 0}
+                          onClick={() => handleMoveQuestion(qIndex, -1)}
+                          className="btn-move-q"
+                          title="Yuqoriga surish"
+                        >
+                          <ChevronUp size={15} />
+                        </button>
+                        <button
+                          type="button"
+                          disabled={qIndex === questions.length - 1}
+                          onClick={() => handleMoveQuestion(qIndex, 1)}
+                          className="btn-move-q"
+                          title="Pastga surish"
+                        >
+                          <ChevronDown size={15} />
+                        </button>
                         <button
                           type="button"
                           className="btn-delete-q"
                           onClick={() => handleRemoveQuestion(qIndex)}
-                          title="Savolni o'chirish"
+                          title={questions.length > 1 ? "Ushbu savolni o'chirish" : "Savolni tozalash"}
                         >
                           <Trash2 size={16} />
                         </button>
-                      )}
+                      </div>
                     </div>
 
                     <input
@@ -458,10 +532,10 @@ export default function QuizManagerModal({
 
                     <div className="options-builder-grid">
                       {q.options.map((opt, optIndex) => (
-                        <div key={optIndex} className={`opt-builder-row opt-${opt.color}`}>
+                        <div key={opt._id || `opt_${optIndex}`} className={`opt-builder-row opt-${opt.color}`}>
                           <input
                             type="radio"
-                            name={`correct-${qIndex}`}
+                            name={`correct-${q._id || qIndex}`}
                             checked={opt.is_correct}
                             onChange={() => {
                               const newQ = [...questions];

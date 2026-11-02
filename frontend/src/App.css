@@ -2467,9 +2467,9 @@
 .join-card {
   width: 100%;
   max-width: 440px;
-  padding: 26px 24px;
+  padding: 24px 22px;
   text-align: center;
-  border-radius: 22px;
+  border-radius: 24px;
   transition: all 0.3s ease;
 }
 
@@ -2483,7 +2483,7 @@
 .join-card-left {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   width: 100%;
 }
 
@@ -2493,16 +2493,36 @@
   width: 100%;
 }
 
-.desktop-host-link {
-  display: none;
+.join-card-bottom-bar {
+  width: 100%;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+  text-align: center;
 }
 
-.mobile-host-link {
-  display: block;
-  margin-top: 14px;
+.join-card-bottom-bar .join-auth-hint-text {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  margin-right: 6px;
 }
 
-@media (min-width: 680px) {
+.join-card-bottom-bar .back-link-btn {
+  background: none;
+  border: none;
+  color: #ff6b00;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.join-card-bottom-bar .back-link-btn:hover {
+  color: #fb923c;
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
   .join-screen-container {
     padding: 20px 18px;
     min-height: calc(100vh - 100px);
@@ -2510,8 +2530,8 @@
 
   .join-card {
     max-width: 860px;
-    padding: 24px 28px;
-    border-radius: 24px;
+    padding: 26px 30px;
+    border-radius: 26px;
   }
 
   .join-card.studio-expanded {
@@ -2521,29 +2541,19 @@
 
   .join-card-layout {
     display: grid;
-    grid-template-columns: 1fr 1.15fr;
-    gap: 24px;
+    grid-template-columns: 1fr 1.12fr;
+    gap: 28px;
     align-items: center;
   }
 
   .join-card-left {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding-right: 22px;
-    border-right: 1px solid rgba(255, 107, 0, 0.18);
+    justify-content: center;
+    gap: 16px;
+    padding-right: 24px;
+    border-right: 1px solid rgba(255, 107, 0, 0.2);
     text-align: center;
-  }
-
-  .desktop-host-link {
-    display: block;
-    margin-top: auto;
-    padding-top: 10px;
-    border-top: 1px dashed rgba(255, 255, 255, 0.1);
-  }
-
-  .mobile-host-link {
-    display: none;
   }
 
   .join-card-right {
@@ -4055,6 +4065,19 @@
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 107, 0, 0.25);
   border-radius: 16px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.question-builder-card.is-dragging {
+  opacity: 0.45;
+  border-style: dashed;
+  transform: scale(0.98);
+}
+
+.question-builder-card.is-drag-over {
+  border-color: #ff6b00;
+  box-shadow: 0 0 20px rgba(255, 107, 0, 0.5), inset 0 0 12px rgba(255, 107, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 .qb-header {
@@ -4063,11 +4086,82 @@
   justify-content: space-between;
 }
 
-.btn-delete-q {
-  background: transparent;
-  color: #f87171;
-  border: none;
+.qb-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qb-drag-handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  cursor: grab;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.qb-drag-handle:hover {
+  color: #ff6b00;
+  background: rgba(255, 107, 0, 0.15);
+}
+
+.qb-drag-handle:active {
+  cursor: grabbing;
+}
+
+.qb-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-move-q {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fed7aa;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-move-q:hover:not(:disabled) {
+  background: rgba(255, 107, 0, 0.25);
+  color: #ffffff;
+  border-color: rgba(255, 107, 0, 0.5);
+}
+
+.btn-move-q:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.btn-delete-q {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-delete-q:hover {
+  background: rgba(239, 68, 68, 0.28);
+  color: #ffffff;
+  border-color: #ef4444;
+  transform: scale(1.06);
 }
 
 .qb-meta-row {
@@ -4773,8 +4867,8 @@
   .join-card-layout {
     display: grid !important;
     grid-template-columns: 1fr 1.08fr !important;
-    gap: 36px !important;
-    align-items: stretch !important;
+    gap: 32px !important;
+    align-items: center !important;
     width: 100% !important;
   }
 
@@ -4782,14 +4876,15 @@
   .join-card-left {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: space-between !important;
-    padding-right: 34px !important;
-    border-right: 1px solid rgba(255, 107, 0, 0.18) !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    padding-right: 32px !important;
+    border-right: 1px solid rgba(255, 107, 0, 0.22) !important;
     text-align: center !important;
   }
 
   .join-card-left .join-header {
-    margin-bottom: 8px !important;
+    margin-bottom: 4px !important;
   }
 
   .join-card-left .join-logo-wrap {
@@ -4812,28 +4907,36 @@
 
   .join-card-left .join-subtitle {
     font-size: 0.94rem !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 8px !important;
   }
 
   .join-card-left .avatar-join-preview-card {
-    padding: 14px 18px !important;
-    border-radius: 18px !important;
+    padding: 16px 20px !important;
+    border-radius: 20px !important;
     background: rgba(255, 107, 0, 0.08) !important;
     border: 1px solid rgba(255, 107, 0, 0.28) !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 0 !important;
   }
 
   .join-card-left .avatar-join-preview-card .kahoot-avatar-wrapper,
   .join-card-left .avatar-join-preview-card svg {
-    width: 92px !important;
-    height: 92px !important;
+    width: 96px !important;
+    height: 96px !important;
+  }
+
+  .join-card-left .avatar-quick-actions {
+    display: flex !important;
+    gap: 10px !important;
+    width: 100% !important;
   }
 
   .join-card-left .btn-spin-quick,
   .join-card-left .btn-studio-quick {
-    padding: 8px 18px !important;
+    flex: 1 !important;
+    padding: 9px 14px !important;
     font-size: 0.88rem !important;
     font-weight: 700 !important;
+    justify-content: center !important;
   }
 
   .join-card-left .active-session-quick-card {
@@ -4850,19 +4953,12 @@
     width: 100% !important;
   }
 
-  .desktop-host-link {
-    display: block !important;
-    margin-top: auto !important;
-    padding-top: 12px !important;
-    border-top: 1px dashed rgba(255, 255, 255, 0.1) !important;
-  }
-
-  .desktop-host-link .back-link-btn {
-    font-size: 0.88rem !important;
-  }
-
-  .mobile-host-link {
-    display: none !important;
+  .join-card-bottom-bar {
+    width: 100% !important;
+    margin-top: 20px !important;
+    padding-top: 14px !important;
+    border-top: 1px dashed rgba(255, 255, 255, 0.12) !important;
+    text-align: center !important;
   }
 
   /* Right Pane */
@@ -5580,89 +5676,128 @@
 
   /* Join Screen on Mobile */
   .join-card {
-    padding: 15px 12px;
-    max-width: 380px;
-    margin: 10px auto;
-    border-radius: 16px;
+    padding: 16px 14px;
+    max-width: 400px;
+    margin: 8px auto;
+    border-radius: 18px;
   }
 
   .join-header {
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    text-align: left;
   }
 
   .join-logo-wrap {
-    width: 36px;
-    height: 36px;
-    margin-bottom: 6px;
+    width: 38px;
+    height: 38px;
+    margin: 0;
     border-radius: 10px;
+    flex-shrink: 0;
   }
 
   .join-title {
-    font-size: 1.15rem;
-    margin-bottom: 2px;
+    font-size: 1.25rem;
+    margin-bottom: 0;
     font-weight: 800;
   }
 
   .join-subtitle {
     font-size: 0.74rem;
     color: var(--text-muted);
-    margin-bottom: 10px;
-    line-height: 1.3;
+    margin-bottom: 0;
+    line-height: 1.2;
   }
 
   .avatar-join-preview-card {
-    padding: 8px;
-    margin-bottom: 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    gap: 10px;
+    border-radius: 14px;
+    margin-bottom: 4px;
   }
 
   .join-avatar-box {
-    margin-bottom: 6px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .join-avatar-box .kahoot-avatar-wrapper,
+  .join-avatar-box svg {
+    width: 52px;
+    height: 52px;
+  }
+
+  .avatar-quick-actions {
+    flex: 1;
+    display: flex;
+    gap: 6px;
   }
 
   .btn-spin-quick,
   .btn-studio-quick {
-    padding: 5px 8px;
-    font-size: 0.72rem;
+    flex: 1;
+    padding: 7px 8px;
+    font-size: 0.76rem;
     border-radius: 8px;
     gap: 4px;
+    justify-content: center;
   }
 
   .input-pin-field {
-    font-size: 1.15rem;
-    padding: 7px 10px;
-    letter-spacing: 2px;
-    border-radius: 8px;
-    height: 42px;
+    font-size: 1.35rem;
+    padding: 7px 12px;
+    letter-spacing: 4px;
+    border-radius: 10px;
+    height: 44px;
+  }
+
+  .input-pin-field::placeholder {
+    letter-spacing: 2px !important;
+    font-size: 1rem !important;
+    opacity: 0.45 !important;
   }
 
   .input-text-field {
-    font-size: 0.85rem;
-    padding: 7px 10px;
-    border-radius: 8px;
+    font-size: 0.88rem;
+    padding: 7px 12px;
+    border-radius: 10px;
     height: 40px;
   }
 
   .form-label {
-    font-size: 0.72rem;
+    font-size: 0.76rem;
     font-weight: 600;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
   }
 
   .form-group {
     gap: 2px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .team-selector-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 5px;
+    gap: 6px;
   }
 
   .team-select-card {
     padding: 6px 8px;
-    font-size: 0.72rem;
-    border-radius: 8px;
+    font-size: 0.76rem;
+    border-radius: 9px;
     gap: 5px;
+    min-height: 34px;
+  }
+
+  .team-select-card.active {
+    background: rgba(255, 107, 0, 0.16) !important;
+    box-shadow: 0 0 12px var(--team-color, rgba(255, 107, 0, 0.4)) !important;
   }
 
   .team-emoji {
@@ -5670,11 +5805,17 @@
   }
 
   .join-submit-btn {
-    padding: 9px 12px;
-    font-size: 0.86rem;
-    border-radius: 8px;
-    height: 42px;
+    padding: 11px 14px;
+    height: 46px;
+    font-size: 0.98rem;
+    border-radius: 12px;
     margin-top: 4px;
+  }
+
+  .join-card-bottom-bar {
+    margin-top: 10px;
+    padding-top: 8px;
+    font-size: 0.8rem;
   }
 
   .join-footer-back {

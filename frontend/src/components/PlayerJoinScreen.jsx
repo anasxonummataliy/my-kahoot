@@ -132,7 +132,8 @@ export default function PlayerJoinScreen({
             onDone={() => setIsStudioOpen(false)}
           />
         ) : (
-          <div className="join-card-layout">
+          <>
+            <div className="join-card-layout">
             {/* Left Pane: Branding, Avatar Showcase, Live Sessions & Exploration */}
             <div className="join-card-left">
               {/* Header */}
@@ -182,27 +183,6 @@ export default function PlayerJoinScreen({
                     <span>Moslash</span>
                   </button>
                 </div>
-              </div>
-
-
-              {/* Desktop Host Link at bottom of left pane */}
-              <div className="join-footer-back desktop-host-link">
-                {authUser && onBackToHost ? (
-                  <button className="back-link-btn" onClick={onBackToHost}>
-                    ← Boshlovchi (Host) paneliga o'tish
-                  </button>
-                ) : !authUser && onOpenAuth ? (
-                  <div>
-                    <span className="join-auth-hint-text">Quiz yaratish yoki xona ochish: </span>
-                    <button
-                      type="button"
-                      className="back-link-btn font-bold"
-                      onClick={() => onOpenAuth('login')}
-                    >
-                      Host sifatida kiring →
-                    </button>
-                  </div>
-                ) : null}
               </div>
             </div>
 
@@ -331,27 +311,29 @@ export default function PlayerJoinScreen({
                 </button>
               </form>
 
-              {/* Mobile Host Link at bottom of right pane */}
-              <div className="join-footer-back mobile-host-link">
-                {authUser && onBackToHost ? (
-                  <button className="back-link-btn" onClick={onBackToHost}>
-                    ← Boshlovchi (Host) paneliga o'tish
-                  </button>
-                ) : !authUser && onOpenAuth ? (
-                  <div>
-                    <span className="join-auth-hint-text">Quiz yaratish yoki xona ochish: </span>
-                    <button
-                      type="button"
-                      className="back-link-btn font-bold"
-                      onClick={() => onOpenAuth('login')}
-                    >
-                      Host sifatida kiring →
-                    </button>
-                  </div>
-                ) : null}
               </div>
             </div>
-          </div>
+
+            {/* Unified Host Navigation Link spanning bottom of card */}
+            <div className="join-card-bottom-bar">
+              {authUser && onBackToHost ? (
+                <button className="back-link-btn" onClick={onBackToHost}>
+                  ← Boshlovchi (Host) paneliga o'tish
+                </button>
+              ) : !authUser && onOpenAuth ? (
+                <div>
+                  <span className="join-auth-hint-text">Quiz yaratish yoki xona ochish: </span>
+                  <button
+                    type="button"
+                    className="back-link-btn font-bold"
+                    onClick={() => onOpenAuth('login')}
+                  >
+                    Host sifatida kiring →
+                  </button>
+                </div>
+              ) : null}
+            </div>
+          </>
         )}
       </div>
     </div>
