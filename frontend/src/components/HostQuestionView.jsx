@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, CheckCircle2, XCircle, ArrowRight, BarChart2, Users, FastForward } from 'lucide-react';
+import { Clock, CheckCircle2, XCircle, ArrowRight, BarChart2, Users, FastForward, StopCircle } from 'lucide-react';
 
 export default function HostQuestionView({
   question,
@@ -13,6 +13,8 @@ export default function HostQuestionView({
   onEndQuestion,
   onShowLeaderboard,
   onNextQuestion,
+  onLeaveGame = null,
+  onStopCompetition = null,
 }) {
   if (!question) return null;
 
@@ -55,18 +57,32 @@ export default function HostQuestionView({
         </div>
 
         {/* Host Quick Skip / Control */}
-        {status === 'question' ? (
-          <button className="btn-secondary btn-sm" onClick={onEndQuestion} title="Vaqt tugashini kutmasdan natijani ko'rsatish">
-            <FastForward size={16} />
-            <span>Vaqtni to'xtatish</span>
-          </button>
-        ) : (
-          <button className="btn-primary btn-sm" onClick={onShowLeaderboard}>
-            <BarChart2 size={16} />
-            <span>Leaderboard</span>
-            <ArrowRight size={16} />
-          </button>
-        )}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {status === 'question' ? (
+            <button className="btn-secondary btn-sm" onClick={onEndQuestion} title="Vaqt tugashini kutmasdan natijani ko'rsatish">
+              <FastForward size={16} />
+              <span>Vaqtni to'xtatish</span>
+            </button>
+          ) : (
+            <div className="review-auto-tag" style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255, 107, 0, 0.15)', border: '1px solid rgba(255, 107, 0, 0.35)', padding: '6px 12px', borderRadius: '999px', fontSize: '0.82rem', color: '#fed7aa', fontWeight: '700' }}>
+              <span className="live-pulse-dot" />
+              <span>Reyting ochilmoqda...</span>
+            </div>
+          )}
+
+          {onStopCompetition && (
+            <button
+              className="btn-danger-soft btn-sm btn-stop-competition"
+              onClick={onStopCompetition}
+              title="Musobaqani to'xtatish va lobbiga qaytish yoki o'yinni tugatish"
+            >
+              <StopCircle size={15} />
+              <span>Musobaqani to'xtatish</span>
+            </button>
+          )}
+
+
+        </div>
       </div>
 
       {/* Center Countdown Ring */}
@@ -142,14 +158,11 @@ export default function HostQuestionView({
       {status === 'review' && (
         <div className="host-review-actions-bar">
           <div className="review-status-text">
-            <span>Savol yakunlandi! Natijalar ko'rsatildi.</span>
+            <span className="live-pulse-dot" style={{ display: 'inline-block', marginRight: '8px' }} />
+            <span>Savol yakunlandi. <strong>Reyting avtomatik ochilmoqda...</strong></span>
           </div>
           <div className="review-buttons-group">
-            <button className="btn-secondary" onClick={onShowLeaderboard}>
-              <BarChart2 size={18} />
-              <span>Leaderboard</span>
-            </button>
-            <button className="btn-primary" onClick={onNextQuestion}>
+            <button className="btn-primary" onClick={onNextQuestion} title="Kutmasdan darhol keyingi savolga o'tish">
               <span>Keyingi Savol</span>
               <ArrowRight size={18} />
             </button>

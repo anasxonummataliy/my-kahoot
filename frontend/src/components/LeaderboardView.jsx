@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Trophy, Medal, Flame, Users, ArrowRight, Flag } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Trophy, Medal, Flame, Users, ArrowRight, Flag, StopCircle } from 'lucide-react';
 import KahootAvatar from './KahootAvatar';
 
 export default function LeaderboardView({
@@ -11,8 +11,14 @@ export default function LeaderboardView({
   onNextQuestion,
   onFinishGame,
   isHost = true,
+  onLeaveGame = null,
+  onStopCompetition = null,
 }) {
   const [activeTab, setActiveTab] = useState(isTeamMode ? 'teams' : 'individual');
+
+  useEffect(() => {
+    setActiveTab(isTeamMode ? 'teams' : 'individual');
+  }, [isTeamMode]);
 
   const getRankBadge = (idx) => {
     if (idx === 0) return <span className="rank-badge gold">🥇 1</span>;
@@ -36,7 +42,7 @@ export default function LeaderboardView({
         </div>
 
         {/* Tab switch between Teams and Individual if team mode */}
-        {isTeamMode && (
+        {isTeamMode ? (
           <div className="tab-pill-switcher">
             <button
               className={`tab-pill-btn ${activeTab === 'teams' ? 'active' : ''}`}
@@ -52,6 +58,11 @@ export default function LeaderboardView({
               <Medal size={16} />
               <span>Yakkaxon Reyting</span>
             </button>
+          </div>
+        ) : (
+          <div className="solo-leaderboard-badge">
+            <Medal size={16} color="#fbbf24" />
+            <span>Yakkaxon Reyting</span>
           </div>
         )}
       </div>
@@ -120,10 +131,22 @@ export default function LeaderboardView({
         </div>
       )}
 
-      {/* Host Navigation controls */}
-      {isHost && (
-        <div className="leaderboard-bottom-controls">
-          {isFinalQuestion ? (
+      {/* Navigation controls */}
+      <div className="leaderboard-bottom-controls" style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+        {onStopCompetition && (
+          <button
+            className="btn-danger-soft btn-stop-competition"
+            onClick={onStopCompetition}
+            title="Musobaqani to'xtatish"
+          >
+            <StopCircle size={18} />
+            <span>Musobaqani to'xtatish</span>
+          </button>
+        )}
+
+
+        {isHost && (
+          isFinalQuestion ? (
             <button className="btn-primary" onClick={onFinishGame}>
               <Flag size={18} />
               <span>G'oliblarni Taqdim Etish (Podium)</span>
@@ -134,9 +157,9 @@ export default function LeaderboardView({
               <span>Keyingi Savolga O'tish</span>
               <ArrowRight size={18} />
             </button>
-          )}
-        </div>
-      )}
+          )
+        )}
+      </div>
     </div>
   );
 }

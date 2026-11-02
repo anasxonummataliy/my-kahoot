@@ -178,8 +178,10 @@ export default function AvatarStudio({
         </div>
       </div>
 
-      {/* Studio Navigation Tabs */}
-      <div className="avatar-studio-tabs">
+      {/* Studio Controls Pane (Tabs + Options) */}
+      <div className="studio-controls-pane">
+        {/* Studio Navigation Tabs */}
+        <div className="avatar-studio-tabs">
         <button
           type="button"
           className={`studio-tab-btn ${activeTab === 'color' ? 'active' : ''}`}
@@ -375,6 +377,7 @@ export default function AvatarStudio({
           </div>
         )}
       </div>
+    </div>
 
       {onDone && (
         <button type="button" className="btn-primary studio-done-btn pulse-glow" onClick={onDone}>

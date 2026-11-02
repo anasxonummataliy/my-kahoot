@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Trophy, Check, X, Flame, Shield, Users, Clock } from 'lucide-react';
+import { Trophy, Check, X, Flame, Shield, Users, Clock, LogOut } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import KahootAvatar from './KahootAvatar';
 
@@ -14,6 +14,7 @@ export default function PlayerGameView({
   answerResult = null,
   correctOptionId = null,
   isTeamMode = true,
+  onLeaveGame = null,
 }) {
   const [selectedId, setSelectedId] = useState(selectedOptionId);
 
@@ -21,9 +22,9 @@ export default function PlayerGameView({
     setSelectedId(selectedOptionId);
   }, [selectedOptionId]);
 
-  // Fire confetti if player answered correctly
+  // Fire confetti if player answered correctly ONLY when in review state (after timer/question ends)
   useEffect(() => {
-    if (answerResult?.is_correct) {
+    if (status === 'review' && answerResult?.is_correct) {
       confetti({
         particleCount: 50,
         spread: 60,
@@ -31,7 +32,7 @@ export default function PlayerGameView({
         colors: ['#22c55e', '#8b5cf6', '#3b82f6', '#f59e0b'],
       });
     }
-  }, [answerResult]);
+  }, [status, answerResult]);
 
   if (!question) {
     return (
@@ -48,7 +49,7 @@ export default function PlayerGameView({
         <p>Boshlovchi savolni boshlaguncha tayyor turing!</p>
         {player && (
           <div className="player-card-mini">
-            <span className="player-avatar">{player.avatar}</span>
+            <KahootAvatar avatar={player.customAvatar || player.avatar} size={32} />
             <span className="player-nick">{player.nickname}</span>
             {isTeamMode && player.team_name && (
               <span className="player-team-tag" style={{ borderColor: player.team_color }}>
@@ -102,7 +103,7 @@ export default function PlayerGameView({
 
         <div className="player-identity-pill">
           <KahootAvatar avatar={player?.customAvatar || player?.avatar} size={28} />
-          <span className="p-nick">{player?.nickname || 'Player #12'}</span>
+          <span className="p-nick">{player?.nickname || "O'yinchi"}</span>
           {isTeamMode && player?.team_name && (
             <span className="p-team" style={{ backgroundColor: player.team_color || '#ff6b00' }}>
               {player.team_name}
@@ -113,6 +114,17 @@ export default function PlayerGameView({
         <div className="player-progress-counter">
           <span>{question.index || 1} / {question.total || 10}</span>
         </div>
+
+        {onLeaveGame && (
+          <button
+            className="player-leave-btn-header"
+            onClick={onLeaveGame}
+            title="O'yindan chiqish"
+          >
+            <LogOut size={13} />
+            <span>Chiqish</span>
+          </button>
+        )}
       </div>
 
       {/* Purple Glowing Progress Track */}
@@ -158,11 +170,11 @@ export default function PlayerGameView({
       {selectedId && status === 'question' && (
         <div className="player-locked-banner">
           <Check size={18} />
-          <span>Javobingiz qabul qilindi! Boshqalar kutilyapti...</span>
+          <span>Javobingiz qabul qilindi! Barcha ishtirokchilar javob bergach natija ko'rsatiladi...</span>
         </div>
       )}
 
-      {/* Review Feedback Banner with animated avatar reaction! */}
+      {/* Review Feedback Banner with animated avatar reaction! Only in review status */}
       {status === 'review' && answerResult && (
         <div className={`player-feedback-card ${answerResult.is_correct ? 'correct' : 'wrong'}`}>
           <div className="feedback-avatar-col">
@@ -187,6 +199,25 @@ export default function PlayerGameView({
               ) : (
                 <span className="wrong-hint">Keyingi savolda omad!</span>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Review Feedback Banner if player did not answer in time */}
+      {status === 'review' && !selectedId && (
+        <div className="player-feedback-card wrong">
+          <div className="feedback-avatar-col">
+            <KahootAvatar
+              avatar={player?.customAvatar || player?.avatar}
+              size={58}
+              reaction="wrong"
+            />
+          </div>
+          <div className="feedback-content">
+            <h3>Vaqt tugadi!</h3>
+            <div className="feedback-details">
+              <span className="wrong-hint">Javob belgilashga ulgurmadingiz. Keyingi savolda tezroq harakat qiling!</span>
             </div>
           </div>
         </div>

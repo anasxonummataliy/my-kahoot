@@ -2,6 +2,7 @@ import random
 import string
 import uuid
 from django.db import models
+from django.contrib.auth.models import User
 
 
 def generate_pin():
@@ -9,6 +10,7 @@ def generate_pin():
 
 
 class Quiz(models.Model):
+    creator = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name="quizzes")
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, default="Answer as fast and correctly as you can!")
     is_public = models.BooleanField(default=True)

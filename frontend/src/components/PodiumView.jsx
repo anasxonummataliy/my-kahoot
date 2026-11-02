@@ -81,32 +81,34 @@ export default function PodiumView({
       )}
 
       {/* 3D-style Podium Stand with Animated Kahoot Avatars */}
-      <div className="podium-stage">
-        {/* 2nd Place (Silver - Left) */}
-        {second ? (
-          <div className="podium-col second-place">
-            <div className="podium-player-card">
-              <KahootAvatar avatar={second.customAvatar || second.avatar} size={76} reaction="celebrate" />
-              <span className="nick-text">{second.nickname}</span>
-              <span className="score-pill">{second.score} ball</span>
+      <div className={`podium-stage ${players.length === 1 ? 'single-winner' : ''}`}>
+        {/* 2nd Place (Silver - Left) - only rendered if multiple players */}
+        {players.length > 1 && (
+          second ? (
+            <div className="podium-col second-place">
+              <div className="podium-player-card">
+                <KahootAvatar avatar={second.customAvatar || second.avatar} size={76} reaction="celebrate" />
+                <span className="nick-text">{second.nickname}</span>
+                <span className="score-pill">{second.score} ball</span>
+              </div>
+              <div className="podium-pedestal pedestal-2">
+                <span className="pedestal-rank">2</span>
+                <span className="pedestal-label">Silver</span>
+              </div>
             </div>
-            <div className="podium-pedestal pedestal-2">
-              <span className="pedestal-rank">2</span>
-              <span className="pedestal-label">Silver</span>
-            </div>
-          </div>
-        ) : (
-          <div className="podium-col empty-col" />
+          ) : (
+            <div className="podium-col empty-col" />
+          )
         )}
 
         {/* 1st Place (Gold - Center) */}
         {first && (
           <div className="podium-col first-place">
             <div className="winner-crown-floating">
-              <Crown size={32} />
+              <Crown size={30} />
             </div>
             <div className="podium-player-card champion">
-              <KahootAvatar avatar={first.customAvatar || first.avatar} size={94} reaction="celebrate" />
+              <KahootAvatar avatar={first.customAvatar || first.avatar} size={90} reaction="celebrate" />
               <span className="nick-text champion-nick">{first.nickname}</span>
               <span className="score-pill champion-score">{first.score} ball</span>
             </div>
@@ -117,21 +119,23 @@ export default function PodiumView({
           </div>
         )}
 
-        {/* 3rd Place (Bronze - Right) */}
-        {third ? (
-          <div className="podium-col third-place">
-            <div className="podium-player-card">
-              <KahootAvatar avatar={third.customAvatar || third.avatar} size={68} reaction="celebrate" />
-              <span className="nick-text">{third.nickname}</span>
-              <span className="score-pill">{third.score} ball</span>
+        {/* 3rd Place (Bronze - Right) - only rendered if multiple players */}
+        {players.length > 1 && (
+          third ? (
+            <div className="podium-col third-place">
+              <div className="podium-player-card">
+                <KahootAvatar avatar={third.customAvatar || third.avatar} size={68} reaction="celebrate" />
+                <span className="nick-text">{third.nickname}</span>
+                <span className="score-pill">{third.score} ball</span>
+              </div>
+              <div className="podium-pedestal pedestal-3">
+                <span className="pedestal-rank">3</span>
+                <span className="pedestal-label">Bronze</span>
+              </div>
             </div>
-            <div className="podium-pedestal pedestal-3">
-              <span className="pedestal-rank">3</span>
-              <span className="pedestal-label">Bronze</span>
-            </div>
-          </div>
-        ) : (
-          <div className="podium-col empty-col" />
+          ) : (
+            <div className="podium-col empty-col" />
+          )
         )}
       </div>
 
