@@ -681,12 +681,18 @@ export default function QuizManagerModal({
               </div>
             ) : filteredQuizzes.length > 0 ? (
               <div className="qm-quiz-rows-list">
-                {filteredQuizzes.map((q) => {
+                {filteredQuizzes.map((q, idx) => {
                   const isSelected = currentQuizId === q.id;
+                  const isMenuOpen = activeMenuId === q.id;
+                  const isNearBottom = idx > 0 && idx >= filteredQuizzes.length - 1;
+                  const canDelete = q.is_owner || !authUser || authUser?.is_staff || !q.creator_name || q.creator_name === 'admin' || q.creator_name === authUser?.username;
                   return (
                     <div
                       key={q.id}
-                      className={`qm-quiz-row-card glass-panel ${isSelected ? 'is-selected-card' : ''}`}
+                      className={`qm-quiz-row-card glass-panel ${isSelected ? 'is-selected-card' : ''} ${isMenuOpen ? 'is-menu-open' : ''}`}
+                      style={{
+                        zIndex: isMenuOpen ? 100 : (filteredQuizzes.length - idx),
+                      }}
                     >
                       {/* Left: Orange Accent Bar + Title & Description */}
                       <div className="qm-card-left">
@@ -758,12 +764,13 @@ export default function QuizManagerModal({
 
                           {activeMenuId === q.id && (
                             <div
-                              className="qm-dropdown-popover"
+                              className={`qm-dropdown-popover ${isNearBottom ? 'open-upward' : ''}`}
                               onClick={(e) => e.stopPropagation()}
                             >
                               <button
                                 className="qm-popover-item"
                                 onClick={() => {
+                                  setActiveMenuId(null);
                                   onSelectQuiz(q.id, false);
                                   onClose();
                                 }}
@@ -775,6 +782,7 @@ export default function QuizManagerModal({
                               <button
                                 className="qm-popover-item"
                                 onClick={() => {
+                                  setActiveMenuId(null);
                                   onSelectQuiz(q.id, true);
                                   onClose();
                                 }}
@@ -783,10 +791,13 @@ export default function QuizManagerModal({
                                 <span>Solo tartibda o'ynash</span>
                               </button>
 
-                              {q.is_owner && (
+                              {canDelete && (
                                 <button
                                   className="qm-popover-item delete-danger"
-                                  onClick={(e) => handleDeleteQuiz(q.id, e)}
+                                  onClick={(e) => {
+                                    setActiveMenuId(null);
+                                    handleDeleteQuiz(q.id, e);
+                                  }}
                                 >
                                   <Trash2 size={14} />
                                   <span>Quizni o'chirish</span>
