@@ -23,6 +23,7 @@ import {
   HelpCircle,
 } from 'lucide-react';
 import { soundManager } from '../utils/soundEffects';
+import { apiUrl } from '../config';
 
 const createBlankQuestion = (order = 1) => ({
   _id: `q_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
@@ -80,7 +81,7 @@ export default function QuizManagerModal({
   const fetchQuizzes = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/quizzes/', {
+      const res = await fetch(apiUrl('/api/quizzes/'), {
         headers: authUser?.id ? { 'X-User-Id': String(authUser.id) } : {},
         credentials: 'include',
       });
@@ -112,7 +113,7 @@ export default function QuizManagerModal({
 
     // Fetch full quiz detail to populate questions
     try {
-      const res = await fetch(`/api/quizzes/${quiz.id}/`, {
+      const res = await fetch(apiUrl(`/api/quizzes/${quiz.id}/`), {
         headers: authUser?.id ? { 'X-User-Id': String(authUser.id) } : {},
         credentials: 'include',
       });
@@ -213,7 +214,7 @@ export default function QuizManagerModal({
     if (e) e.stopPropagation();
     if (!window.confirm("Rostdan ham ushbu quizni o'chirmoqchimisiz?")) return;
     try {
-      const res = await fetch(`/api/quizzes/${quizId}/`, {
+      const res = await fetch(apiUrl(`/api/quizzes/${quizId}/`), {
         method: 'DELETE',
         headers: {
           ...(authUser?.id ? { 'X-User-Id': String(authUser.id) } : {}),
@@ -239,7 +240,7 @@ export default function QuizManagerModal({
     soundManager.playSpinLand();
 
     try {
-      const url = editingQuizId ? `/api/quizzes/${editingQuizId}/` : '/api/quizzes/';
+      const url = editingQuizId ? apiUrl(`/api/quizzes/${editingQuizId}/`) : apiUrl('/api/quizzes/');
       const method = editingQuizId ? 'PUT' : 'POST';
 
       const res = await fetch(url, {

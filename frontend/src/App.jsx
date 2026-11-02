@@ -15,6 +15,7 @@ import KahootAvatar, { getRandomAvatar } from './components/KahootAvatar';
 import AvatarStudio from './components/AvatarStudio';
 import PlayerWaitingLobby from './components/PlayerWaitingLobby';
 import { soundManager } from './utils/soundEffects';
+import { apiUrl, WS_BASE_URL } from './config';
 
 export default function App() {
   // Authentication State
@@ -203,7 +204,7 @@ export default function App() {
       if (saved) localUser = JSON.parse(saved);
     } catch (e) {}
 
-    fetch('/api/auth/me/', {
+    fetch(apiUrl('/api/auth/me/'), {
       credentials: 'include',
       headers: localUser?.id ? { 'X-User-Id': String(localUser.id) } : {},
     })
@@ -273,7 +274,7 @@ export default function App() {
   const initializeSession = async (targetPin, currentRole, savedPlayer) => {
     try {
       const token = getHostToken(targetPin);
-      const res = await fetch(`/api/sessions/${targetPin}/`, {
+      const res = await fetch(apiUrl(`/api/sessions/${targetPin}/`), {
         headers: {
           ...(token ? { 'X-Host-Token': token } : {}),
         },
@@ -312,7 +313,7 @@ export default function App() {
 
   const createBackendSession = async (quizId = null) => {
     try {
-      const res = await fetch('/api/sessions/create/', {
+      const res = await fetch(apiUrl('/api/sessions/create/'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ quiz_id: quizId, is_team_mode: isTeamMode }),
@@ -383,10 +384,9 @@ export default function App() {
         socketRef.current.close();
       } catch (e) {}
     }
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const hostToken = getHostToken(gamePin);
     const queryParam = hostToken ? `?host_token=${encodeURIComponent(hostToken)}` : '';
-    const wsUrl = `${protocol}//${window.location.host}/ws/quiz/${gamePin}/${queryParam}`;
+    const wsUrl = `${WS_BASE_URL}/ws/quiz/${gamePin}/${queryParam}`;
     try {
       const ws = new WebSocket(wsUrl);
 
@@ -598,7 +598,7 @@ export default function App() {
     // 2. Also send REST request to guarantee start on backend & broadcast to all players
     if (currentPin) {
       try {
-        const res = await fetch(`/api/sessions/${currentPin}/start-question/`, {
+        const res = await fetch(apiUrl(`/api/sessions/${currentPin}/start-question/`), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -675,7 +675,7 @@ export default function App() {
 
     if (currentPin) {
       try {
-        const res = await fetch(`/api/sessions/${currentPin}/end-question/`, {
+        const res = await fetch(apiUrl(`/api/sessions/${currentPin}/end-question/`), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -774,7 +774,7 @@ export default function App() {
 
     if (currentPin) {
       try {
-        await fetch(`/api/sessions/${currentPin}/show-leaderboard/`, {
+        await fetch(apiUrl(`/api/sessions/${currentPin}/show-leaderboard/`), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -807,7 +807,7 @@ export default function App() {
 
     if (currentPin) {
       try {
-        const res = await fetch(`/api/sessions/${currentPin}/next-question/`, {
+        const res = await fetch(apiUrl(`/api/sessions/${currentPin}/next-question/`), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -871,7 +871,7 @@ export default function App() {
 
     if (currentPin) {
       try {
-        await fetch(`/api/sessions/${currentPin}/restart/`, {
+        await fetch(apiUrl(`/api/sessions/${currentPin}/restart/`), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -903,7 +903,7 @@ export default function App() {
     sendWsAction('toggle_team_mode', { is_team_mode: nextMode });
 
     if (pin) {
-      fetch(`/api/sessions/${pin}/toggle-team-mode/`, {
+      fetch(apiUrl(`/api/sessions/${pin}/toggle-team-mode/`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ is_team_mode: nextMode }),
@@ -940,7 +940,7 @@ export default function App() {
 
     try {
       // 1. Check if session exists on backend
-      const checkRes = await fetch(`/api/sessions/${targetPin}/`);
+      const checkRes = await fetch(apiUrl(`/api/sessions/${targetPin}/`));
       if (!checkRes.ok) {
         setJoinError(`"${targetPin}" PIN kodli o'yin topilmadi! Iltimos, kodni to'g'ri kiritganingizni tekshiring.`);
         setIsJoining(false);
@@ -980,7 +980,7 @@ export default function App() {
       };
 
       // 3. Register player in session
-      const joinRes = await fetch(`/api/sessions/${targetPin}/join/`, {
+      const joinRes = await fetch(apiUrl(`/api/sessions/${targetPin}/join/`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(joinPayload),
@@ -1073,7 +1073,7 @@ export default function App() {
 
     // REST Fallback for reliable cross-device avatar sync
     if (pin) {
-      fetch(`/api/sessions/${pin}/player/avatar/`, {
+      fetch(apiUrl(`/api/sessions/${pin}/player/avatar/`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1093,7 +1093,7 @@ export default function App() {
     sendWsAction('stop_game', { mode });
 
     if (pin) {
-      fetch(`/api/sessions/${pin}/stop/`, {
+      fetch(apiUrl(`/api/sessions/${pin}/stop/`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mode }),
@@ -1132,7 +1132,7 @@ export default function App() {
       sendWsAction('submit_answer', payload);
     } else if (pin) {
       // Fallback to REST only if WebSocket is disconnected
-      fetch(`/api/sessions/${pin}/answer/`, {
+      fetch(apiUrl(`/api/sessions/${pin}/answer/`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -1197,7 +1197,7 @@ export default function App() {
   const handleLogout = async () => {
     soundManager.playClick();
     try {
-      await fetch('/api/auth/logout/', {
+      await fetch(apiUrl('/api/auth/logout/'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1228,7 +1228,7 @@ export default function App() {
       const currentToken = getHostToken(pin);
       // If host has an active lobby session, switch the quiz for current room so players stay in room!
       if (pin && role === 'host' && !asPlayer) {
-        res = await fetch(`/api/sessions/${pin}/switch-quiz/`, {
+        res = await fetch(apiUrl(`/api/sessions/${pin}/switch-quiz/`), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -1238,7 +1238,7 @@ export default function App() {
         });
       }
       if (!res || !res.ok) {
-        res = await fetch('/api/sessions/create/', {
+        res = await fetch(apiUrl('/api/sessions/create/'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ quiz_id: quizId, is_team_mode: isTeamMode }),

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Lock, User, Sparkles, LogIn, UserPlus, AlertCircle, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { apiUrl } from '../config';
 
 export default function AuthModal({
   isOpen,
@@ -33,7 +34,7 @@ export default function AuthModal({
     }
 
     setLoading(true);
-    const endpoint = tab === 'register' ? '/api/auth/register/' : '/api/auth/login/';
+    const endpoint = tab === 'register' ? apiUrl('/api/auth/register/') : apiUrl('/api/auth/login/');
     const body = tab === 'register'
       ? { username: username.trim(), password: password.trim(), name: name.trim() }
       : { username: username.trim(), password: password.trim() };

@@ -3,6 +3,7 @@ import { Trophy, ArrowRight, Dices, Palette, Users, User, Loader2, Sparkles } fr
 import KahootAvatar, { getRandomAvatar } from './KahootAvatar';
 import AvatarStudio from './AvatarStudio';
 import { soundManager } from '../utils/soundEffects';
+import { apiUrl } from '../config';
 
 const DEFAULT_TEAMS = [
   { name: 'Red Dragons', color: '#ef4444', icon: '🐉' },
@@ -46,7 +47,7 @@ export default function PlayerJoinScreen({
   useEffect(() => {
     const cleanPin = (pin || '').trim();
     if (cleanPin.length === 6) {
-      fetch(`/api/sessions/${cleanPin}/`)
+      fetch(apiUrl(`/api/sessions/${cleanPin}/`))
         .then((r) => (r.ok ? r.json() : null))
         .then((data) => {
           if (data && typeof data.is_team_mode === 'boolean') {

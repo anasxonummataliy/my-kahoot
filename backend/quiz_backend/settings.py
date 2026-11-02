@@ -63,6 +63,10 @@ REST_FRAMEWORK = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
+    'https://api-kahoot.anasxonummataliy.dev',
+    'http://api-kahoot.anasxonummataliy.dev',
+    'https://*.vercel.app',
+    'https://*.anasxonummataliy.dev',
     'https://*.ngrok-free.dev',
     'http://*.ngrok-free.dev',
     'https://*.ngrok-free.app',
@@ -154,6 +158,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 # Email
