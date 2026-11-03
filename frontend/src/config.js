@@ -5,10 +5,10 @@ const isLocal = typeof window !== 'undefined' &&
 
 // API Base URL
 // In local dev with Vite proxy, use relative URL (empty string).
-// In production, use the Vercel /api rewrite so the browser stays same-origin.
+// In production, use the ngrok tunnel that exposes the backend.
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL !== undefined && import.meta.env.VITE_API_BASE_URL !== ''
   ? import.meta.env.VITE_API_BASE_URL
-  : '';
+  : (isLocal ? '' : 'https://noneloquently-phyllotactical-roy.ngrok-free.dev');
 
 // WebSocket Base URL
 // Local: ws(s)://current-host

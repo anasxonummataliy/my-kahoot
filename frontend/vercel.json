@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://api-kahoot.anasxonummataliy.dev/api/:path*"
+      "destination": "https://noneloquently-phyllotactical-roy.ngrok-free.dev/api/:path*"
     },
     {
       "source": "/(.*)",
