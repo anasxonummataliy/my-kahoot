@@ -5,10 +5,10 @@ const isLocal = typeof window !== 'undefined' &&
 
 // API Base URL
 // In local dev with Vite proxy, use relative URL (empty string).
-// In production (e.g. Vercel deployment), point to the live backend.
+// In production, use the Vercel /api rewrite so the browser stays same-origin.
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL !== undefined && import.meta.env.VITE_API_BASE_URL !== ''
   ? import.meta.env.VITE_API_BASE_URL
-  : (isLocal ? '' : 'https://api-kahoot.anasxonummataliy.dev');
+  : '';
 
 // WebSocket Base URL
 // Local: ws(s)://current-host
