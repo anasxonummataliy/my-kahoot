@@ -8,7 +8,7 @@ const isLocal = typeof window !== 'undefined' &&
 // In production, point to the public backend.
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL !== undefined && import.meta.env.VITE_API_BASE_URL !== ''
   ? import.meta.env.VITE_API_BASE_URL
-  : (isLocal ? '' : 'https://api-kahoot.anasxonummataliy.dev');
+  : (import.meta.env.DEV ? '' : 'https://api-kahoot.anasxonummataliy.dev');
 
 // WebSocket Base URL
 // Local: ws(s)://current-host
@@ -18,7 +18,7 @@ const localWsHost = typeof window !== 'undefined' ? window.location.host : 'loca
 
 export const WS_BASE_URL = import.meta.env.VITE_WS_BASE_URL !== undefined && import.meta.env.VITE_WS_BASE_URL !== ''
   ? import.meta.env.VITE_WS_BASE_URL
-  : (isLocal ? `${localWsProtocol}//${localWsHost}` : 'wss://api-kahoot.anasxonummataliy.dev');
+  : (import.meta.env.DEV ? `${localWsProtocol}//${localWsHost}` : 'wss://api-kahoot.anasxonummataliy.dev');
 
 /**
  * Builds full API URL from relative endpoint
