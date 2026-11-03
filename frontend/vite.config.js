@@ -9,11 +9,11 @@ export default defineConfig({
     allowedHosts: true,
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:8002',
+        target: 'http://127.0.0.1:18002',
         changeOrigin: true,
       },
       '/ws': {
-        target: 'ws://127.0.0.1:8002',
+        target: 'ws://127.0.0.1:18002',
         ws: true,
       },
     },
